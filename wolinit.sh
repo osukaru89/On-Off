@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 if (test $(whoami) != 'root') then
 	echo "Please, run this script as root"
 	exit
