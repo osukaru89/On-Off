@@ -1,7 +1,10 @@
 PHP-WOL application's dependencies :
+
 cron
 ping
 ethtool, ifconfig (for setup script)
+libssh2-php
+php5-ldap
 
 Commands to run at the server's install :
 	
