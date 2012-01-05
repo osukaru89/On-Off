@@ -1,0 +1,55 @@
+Registration :
+	Users cannot register to WOL application. You need to create yourself an account for them, and give them their login and password. Please, tell them they need to change their password and choose a strong one.
+
+Connection :
+	Go to the application's main page. If you cannot see the window login, it means that your web browser does not support javascript and jquery. Please, download and use a recent version of Firefox or Chromium browser.
+
+Functionalities of users' web interface :
+	With WOL, registered users can see the status, power on or turn off :
+		* all the hosts linked to you by the admin
+		* all the hosts in farms you are member of
+		* all the groups with access level lower than access level of a group you are member of
+	You have to manage these groups and farms, and to create relationships between users and hosts.
+
+
+______________________________
+Admin interface :
+
+Settings :
+	- general settings : configure the application's basic settings
+	- LDAP Settings : if your company has a LDAP network, you can configure parameters here.
+	- Statistics settings : choose settings of how the server will get and keep uptimes.
+	- change password : as WOL's admin, you need to choose a very strong password, and of possible change it sometimes.
+	- scheduled tasks : see all the tasks that have been scheduled by you or other admins. It is also here that you can delete them.
+		When you click on the button, the corresponding task will highlight and a window will be opened to ask you confirmation.
+	- schedule : the interface to create scheduled tasks to wake on or turn off hosts, or all hosts being part of a farm or group.
+		You can choose to run the task every day of week or only some custom days. The same for days of month and months. 
+		But you need to choose the minute and hour the task will be run. 
+		A message of "successful scheduling" will be printed to you if the task has been registered in the database.
+
+View :
+	- All hosts : here you can view the list and status of all known hosts, power them on and turn them off.
+	- All farms : to view all the farms with hosts being part of each one, and turn off/wake on all hosts or the entire farm.
+	- All host groups : the same as "All farms", but for host groups...
+	- Statistics : here you will be able to see uptimes : all daily uptimes for a custom host, or all hosts uptimes for a custom day.
+	- Application logs : All the main actions you and other users can do on the application are registered in the database, with their date, their author and short information. You can see them on this page, and make searchs by type of action, author or date. Everything happening on the system will be kept in memory !
+
+Manage :
+	- Hosts : The page to register new host with its properties (name, mac, ip and owner), to change these properties (apart from the name), and to delete them. For every change or deletion, a confirmation window will be opened and the selected user will be hightlighted.
+	- Users : On this page, you will be able to add new users (with email, login and password), delete them and also change their email and role, add or delete relationship between hosts and users. For every change or deletion, a confirmation window will be opened and the selected user will be hightlighted.
+		If you click on the "Manage Hosts of user" button, you will be able to drag and drop hosts on this user (or double click on them), to create or delete relationships between hosts and users.
+	- Farms/Usergroups/Hostgroup : You can select on the menu every farm, or create a new farm.
+		On the farm's page, you will be able to drag and drop hosts and users in the farm/group, or put them out. You can also use double click.
+	- Groups permissions : On this page you will be able to change access level of every group of hosts or users. By clicking on a host group you will hightlight all the user groups that have permissions on it, and by clicking on a user group, the hosts groups it has permissions on will be highlighted.
+	- Invitations : To send and manage invitations : you can create an invitation, with dates of begin and end, to allow an external user to wake on hosts or farms, with a randomly generated hash, sent by email.
+Refresh page :
+	- The same role as the "F5" button.
+
+User page :
+	- To see only your own hosts and the farms you are part of, as every user can do.
+
+____________________________
+Warnings :
+
+- The WOL application uses Cron to schedule tasks. Cron runs a script named "calledByCron.php" every minute, and this script checks if he has something to do on the current minute of the current hour, of the current day of month/week of the current months. Be careful, if you delete this line from your crontab, all the scheduled tasks will be useless.
+- If the page refreshs, you are logged out. That is why the "F5" key has been handled to call a "custom" refresh function. But if you click on the "back" button of your web browser, you will be logged out.

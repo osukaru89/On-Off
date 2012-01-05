@@ -1,0 +1,28 @@
+<div id="formadddiscovered" class="formadddiscovered">
+	<div class="ui-state-error ui-corner-all" style="margin-top: 20px; padding: 0 .7em;">  </div>
+		<form>
+			<p>
+				<label> Name (3-40 chars) : </label>
+      		<input type="text" id="nameDiscover" name="nameDiscover" value="${name}"/>
+      	</p>
+      	<p> 
+      		<label> MAC address (XX:XX:XX:XX:XX:XX) : </label>
+      		<input type="text" id="macDiscover" name="macDiscover" value="${mac}"/>
+      	</p>
+      	<p>
+      		<label> IP address : </label>
+      		<input type="text" id="ipDiscover" name="ipDiscover" value="${ip}"/>
+      	</p>
+      	<p>
+      		<label> Owner of the host : </label>
+      		<select id=userDiscover name="user"> 
+      		{{each users}}
+      			<option value="${id}"> ${login} </option>
+      		{{/each}}
+      		</select>
+      	</p>
+   	</form>
+   </div>
+</div>
+<br>
+<br>

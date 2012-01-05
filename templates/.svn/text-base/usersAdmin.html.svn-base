@@ -1,0 +1,50 @@
+<h1> Users : </h1>  
+<table>
+	<TR> 
+		<TH> number </TH> 
+		<TH> login </TH> 
+		<TH> email </TH> 
+		<TH> role </TH> 
+		<TH> registered since </TH> 
+		<TH> hosts </TH> 
+		<TH> delete </TH> 
+	</TR>	  		
+{{each users}}
+	<TR id="${id}">
+		<TD> ${id} </TD>
+		<TD> ${login} </TD>
+		<TD> <div id="emailUserAdmin${id}">${email}</div> 
+			<button class="ui-state-default ui-corner-all" title="change Email" onclick="changeEmail(${id}, '${login}')">
+				<span class="ui-icon ui-icon-transferthick-e-w"></span>
+			</button>
+		</TD>
+		<TD> ${role} 
+			{{if role != 'admin'}}
+				<button class="ui-state-default ui-corner-all" title="change Role" onclick="changeRole(${id}, '${login}')">
+					<span class="ui-icon ui-icon-transferthick-e-w"></span>
+				</button>	
+			{{/if}}		
+		</TD>
+		<TD> ${regDate} </TD>
+		<TD>
+			<div id="${id}" class="hostsUser">
+				<button class="manageHostsUser" onclick="manageHostsOfUser(${id})"> Manage Hosts of User </button> 
+				{{each hosts}} ${nameH} ; {{/each}}			
+			</div>
+		</TD>
+		<TD> {{if role != 'admin'}}
+				<button class="delUser" id="${id}"> Delete User </button> 
+			{{/if}}		
+		</TD> 
+	</TR>
+{{/each}}		
+</table>
+<br>
+
+{{if (ldapOK == 1) }}
+<p><button id="importFromLdap" onclick="importFromLdap()"> Import users from LDAP </button></p>
+{{/if}}
+
+<div id="dialog-usersAdmin" title="Delete the user ?">
+	<p>  Do you want to delete the selected user ? </p>
+</div>

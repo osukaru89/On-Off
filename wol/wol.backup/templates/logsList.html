@@ -1,0 +1,59 @@
+<div id="generalWrapper">
+
+<h1 class="header_bg">Logs : </h1>
+<h3> Search :</h3>
+<div id="log_selects">
+<select id="idUser">
+		<option value="all"> ALL USERS </option>
+	{{each users}}
+		<option value="${id}"> ${login} </option>
+	{{/each}}
+</select>
+
+<select id="idEvent">
+		<option value="all"> ALL EVENTS </option>
+	{{each events}}
+		<option value="${id}"> ${name} </option>
+	{{/each}}
+</select>
+
+<select id="date">
+		<option value="all"> ALL DATES </option>
+		<option value="hour"> Last hour </option>		
+		<option value="today"> Today </option>
+		<option value="week"> Last week </option>
+		<option value="month"> Last month </option>
+		<option value="year"> Last year </option>
+</select>
+</div>
+<button id="seecustomlogs" onclick="seeCustomLogs()"> View custom logs </button>
+
+<br><br>
+
+<table>
+	<TR>
+		<TH>number</TH>
+		<TH>event</TH>
+		<TH>who ?</TH>
+		<TH>date</TH>
+		<TH>information</TH>
+		<TH>success ?</TH>
+	</TR>
+{{each logs}}
+	<TR>
+		<TD> ${id} </TD> 
+		<TD id="${eventID}"> ${eventName} </TD> 
+		<TD id="${authorID}"> ${authorLogin} </TD>
+		<TD> ${date} </TD>
+		<TD> ${info} </TD>
+		<TD> 
+			{{if (success == '0')}} 
+				Yes 
+			{{else}} 
+				No 
+			{{/if}} 
+		</TD>
+	</TR>			
+{{/each}}
+</table>
+</div> 

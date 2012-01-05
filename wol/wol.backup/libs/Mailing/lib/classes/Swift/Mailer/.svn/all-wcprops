@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/wol/!svn/ver/58/trunk/php-wol-2.0/libs/Mailing/lib/classes/Swift/Mailer
+END
+ArrayRecipientIterator.php
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/wol/!svn/ver/58/trunk/php-wol-2.0/libs/Mailing/lib/classes/Swift/Mailer/ArrayRecipientIterator.php
+END
+RecipientIterator.php
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/wol/!svn/ver/58/trunk/php-wol-2.0/libs/Mailing/lib/classes/Swift/Mailer/RecipientIterator.php
+END

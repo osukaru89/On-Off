@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/wol/!svn/ver/58/trunk/php-wol-2.0/libs/Wol
+END
+HostGroup.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/wol/!svn/ver/49/trunk/php-wol-2.0/libs/Wol/HostGroup.php
+END
+UserGroup.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/wol/!svn/ver/44/trunk/php-wol-2.0/libs/Wol/UserGroup.php
+END
+UserData.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/wol/!svn/ver/48/trunk/php-wol-2.0/libs/Wol/UserData.php
+END
+ManageHosts.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/wol/!svn/ver/49/trunk/php-wol-2.0/libs/Wol/ManageHosts.php
+END
+Manager.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/wol/!svn/ver/58/trunk/php-wol-2.0/libs/Wol/Manager.php
+END
+ManageUsers.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/wol/!svn/ver/49/trunk/php-wol-2.0/libs/Wol/ManageUsers.php
+END
+Host.php
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/wol/!svn/ver/47/trunk/php-wol-2.0/libs/Wol/Host.php
+END
+Bootstrap.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/wol/!svn/ver/42/trunk/php-wol-2.0/libs/Wol/Bootstrap.php
+END
+User.php
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/wol/!svn/ver/45/trunk/php-wol-2.0/libs/Wol/User.php
+END
+UserLdap.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/wol/!svn/ver/45/trunk/php-wol-2.0/libs/Wol/UserLdap.php
+END
+ManageFarms.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/wol/!svn/ver/48/trunk/php-wol-2.0/libs/Wol/ManageFarms.php
+END
+Farm.php
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/wol/!svn/ver/58/trunk/php-wol-2.0/libs/Wol/Farm.php
+END
+ManageHostGroups.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/wol/!svn/ver/48/trunk/php-wol-2.0/libs/Wol/ManageHostGroups.php
+END
+ManageUserGroups.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/wol/!svn/ver/48/trunk/php-wol-2.0/libs/Wol/ManageUserGroups.php
+END
+Admin.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/wol/!svn/ver/42/trunk/php-wol-2.0/libs/Wol/Admin.php
+END

@@ -1,0 +1,7 @@
+- page for general settings
+OK - statistics (send pings to all hosts to check if they are turned on or not)
+OK - confirmation popup
+- dispatcher
+OK - send getStatus only one time for each host
+
+OK - don't delete host if owner is deleted !

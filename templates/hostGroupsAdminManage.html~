@@ -1,0 +1,58 @@
+
+	<div id="hg${idHostGroup}" class="hostGroup">
+
+	    <div id="header_area">
+		<h1 class="header_bg">${nameHostGroup} (host group) </h1>
+	    </div>
+
+	    <div id="info_area">
+
+	      <span id="info">Use drag and drop or double click to move hosts</span>
+
+	      <div id="button_area">
+		<button id="buttonDeleteGroup"> Delete group </button>
+	      </div>
+
+	    </div>
+
+	    <div id="hosts" class="ui-helper-reset ui-helper-clearfix">
+		<ul id="hosts_list" class="ui-helper-reset ui-helper-clearfix">
+			<h4 class="header_bg"> Hosts (not in group) </h4>
+			<p>
+				<input type="text" name="searchHosts" id="searchHosts"/>
+				<button id="buttonSearchHosts"> Search ! </button>
+			</p>
+			{{each notInGroup}}
+			<li id="${idH}" class="hosts ui-widget-content ui-corner-tr">
+				<h5 class="ui-widget-header"> ${nameH} </h5>
+				<label> MAC : <b> ${mac} </b> </label>
+				<p><label> Owner : <b> ${ownername} </b> </label></p>
+			</li>
+			{{/each}}
+		    <div class="toClear"> </div>
+		</ul>
+	      </div>
+
+
+	      <div id="group" class="ui-widget-content ui-state-default">
+
+			<h4 class="header_bg"> Group </h4>
+<!--  -->
+
+			<ul id="hostsinGroup">	
+				{{each inGroup}}
+				<li id="${idH}" class="hosts ui-widget-content ui-corner-tr">
+					<h5 class="ui-widget-header"> ${nameH} </h5>
+					<label> MAC : <b> ${mac} </b> </label>
+					<p><label> Owner : <b> ${ownername} </b> </label></p>
+				</li>
+				{{/each}}
+				<div class="toClear"> </div>
+			</ul>
+	      </div>
+		
+		<div id="dialog-hostGroups" title="Delete this host group ?">
+			<p>  Do you want to delete the selected host group ? </p>
+		</div>
+	
+	</div>

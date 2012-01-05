@@ -1,0 +1,16 @@
+Registration :
+	Users cannot register to WOL application. You need to ask the administrator of WOL to create an account for you.
+	Please, when you are registred, change your password as soon as possible, and choose a strong one.
+
+Connection :
+	Go to the application's main page. If you cannot see the window login, it means that your web browser does not support javascript and jquery. Please, download and use a recent version of Firefox or Chromium browser.
+
+Functionalities of users' web interface :
+	With WOL, you can see the status, power on or turn off :
+		* all the hosts linked to you by the admin
+		* all the hosts in farms you are member of
+		* all the groups with access level lower than access level of a group you are member of
+	To join a group, a farm or to be associated to an host, contact your admin !
+	
+Other functionalities :
+	Wol allows the admin to schedule tasks : wake on or turn off computers every day, every week, or every month or with custom time and date parameters.

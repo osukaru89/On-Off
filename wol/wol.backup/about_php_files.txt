@@ -1,0 +1,50 @@
+root directory :
+├── index.php					The main page. Gets ajax requests and calls "manage" class to do actions, update/query the database, get data...
+├── header.php					Page's header. Included in index.php, contains <head>, some <div> and the connect-form
+├── footer.php					Page's footer. Included in index.php, closes the divs tags opened in header.php
+├── calledByCron.php			Script called by cron only, every minute. Does not print anything but checks the database to see if there is something to do.
+└── daemonGetStatus.php		Script also called by cron, to get the status of each host and update uptimes if needed.
+	
+
+libs directory :
+├── Config
+│   └── ManageConf.php				To manage configurations files, with the same syntax as php.ini
+├── Invitation
+│   ├── InvitManager.php			To manage invitations (create, delete, and check hash provided by users)
+│   └── Invit.php						Model class to represent an invitation
+├── Ldap
+│   └── Authentication.php			To manage LDAP authentication : authenticate users, get/set configuration or import LDAP users 
+├── Mailing
+│   ├── Mail.php						Model class to represent an email
+│   └── Sender.php					To construct and send emails for each type of action.
+├── Statistics
+│   ├── HostUptime.php				Model class to represent an host's uptimes
+│   ├── HostUptimeWeek.php			Model class to represent a week of uptimes for an host
+│   └── ManageStats.php				To manage statistics : updates uptimes, and get uptimes by host or day.
+└── Wol
+    ├── Admin.php						Model class to represent an authenticated admin (extends User)
+    ├── Bootstrap.php				includes needed files (when an unknown class name is found)
+    ├── DB
+    │   └── Database.php			allows other classes to connect to the mysql database
+    ├── Farm.php						Model class to represent a farm
+    ├── HostGroup.php				Model class to represent a group of hosts
+    ├── Host.php						Model class to represent an host
+    ├── Log
+    │   ├── Logger.php				To manage logs : add log, get logs data or search logs by date/people/action
+    │   └── Log.php					Model class to represent a log
+    ├── ManageFarms.php				To manage farms : create, delete, add/remove hosts/users, and get farm's data
+    ├── ManageHostGroups.php		To manage host groups : create, delete, add/remove hosts, and get data
+    ├── ManageHosts.php				To manage hosts : create, delete, update, and get data
+    ├── Manager.php					To get informations that cannot be stored in the model, by querying the database
+    ├── ManageUserGroups.php		To manage user groups : create, delete, add/remove users, and get data
+    ├── ManageUsers.php				To manage users : create, delete, update, and get data
+    ├── Scheduler
+    │   ├── CronManager.php		To manage tasks : create, delete, get data, and to run scheduled tasks
+    │   └── Task.php					Model class to represent a Task
+    ├── Tools
+    │   ├── hashpass.php			It is not a class. It contains some functions of hash
+    │   └── Wakeonlan.php			Contains Wake on LAN tools
+    ├── UserData.php					Model class to represent an user
+    ├── UserGroup.php				Model class to represent a group of users
+    ├── UserLdap.php					Model class to represent an user authenticated with LDAP
+    └── User.php						Model class to represent an authenticated user

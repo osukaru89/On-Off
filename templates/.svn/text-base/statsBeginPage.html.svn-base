@@ -1,0 +1,26 @@
+<div id="statsbeginpage">
+
+	<h1> Statistics </h1>
+
+	<div id="chooseStatsType">
+		<input type="radio" id="customHostStats" name="radio1" checked="checked"/><label for="customHostStats"> By Host </label>
+		<input type="radio" id="allHostsStats" name="radio1"/><label for="allHostsStats"> By Date </label>
+	</div>
+
+	<div id="ifCustomHost">
+		<p> 
+			<select id="allHosts">
+				{{each hosts}}
+				<option value="${idH}">${nameH}</option>
+				{{/each}}
+			</select>
+		</p>
+	</div>
+	<br>
+	<div id="ifAllHosts">
+		<p>Date : <input type="text" id="dateHostsStats" readonly></p>				
+	</div>
+	
+	<button id="viewStats"> View Statistics </button>
+
+</div>

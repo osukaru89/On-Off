@@ -1,0 +1,51 @@
+<div id="viewMailContent"> 
+	<h1> Emails content : </h1>
+	
+	<div id="selectors">
+		<p>
+			<label> Action : </label>
+			<select id="action">
+				<option value="null">  </option>
+				{{each actions}}
+					<option value="${id}"> ${name} </option>
+				{{/each}}	
+			</select>
+		</p>
+		<p>
+			<label> Language : </label>
+			<select id="lang">
+				{{each lang}}
+					<option value="${name}"> ${name} </option>			
+				{{/each}}	
+			</select>
+		</p>
+		<button id="viewEmailContent"> View </button>
+	</div>
+	<br><br>
+	<div id="dataForms"> 
+	   <p> 
+  		  	<label> Sent by : </label>
+	   	<input type="text" id="sender" name="sender" value=""/>
+ 		</p>
+		<p> 
+  	  		<label> Subject : </label>
+  	 		<input type="text" id="subject" name="subject" value=""/>
+ 		</p>
+   	<p> 
+    		<label> Text : </label>
+ 		</p>
+		<p>
+   		<textarea id="textMail" cols="50" rows="10"> </textarea>
+ 		</p>
+		<p>
+    		<label> Tokens : <b id="listofTokens"></b> </label>
+		</p> 
+		<p>		
+	 		<div id="active">
+				<input type="radio" id="activeMail" name="radio1" checked="checked"/><label for="activeMail"> Send mail for this action </label>
+				<input type="radio" id="dontactiveMail" name="radio1"/><label for="dontactiveMail"> Do not send anything </label>
+			</div>
+		</p>
+		<button id="saveEmailContent"> Save </button>
+	</div>
+</div>

@@ -1,0 +1,57 @@
+<div id="manageWrapper">
+<h1 class="header_bg"> Users : </h1>  
+<table>
+	<TR> 
+		<TH> number </TH> 
+		<TH> login </TH> 
+		<TH> email </TH> 
+		<TH> role </TH> 
+		<TH> registered since </TH> 
+		<TH> hosts </TH> 
+		<TH> delete </TH> 
+	</TR>	  		
+{{each users}}
+	<TR id="${id}">
+		<TD> ${id} </TD>
+		<TD> ${login} </TD>
+		<TD> <div id="emailUserAdmin${id}"></div> 
+			<button class="changeEmail" title="change Email" onclick="changeEmail(${id}, '${login}')">
+				<span class="">${email}</span>
+			</button>
+		</TD>
+		<TD>
+			{{if role != 'admin'}}
+				<button class="changeRole" title="change Role" onclick="changeRole(${id}, '${login}')">
+					<span class="">${role}</span>
+				</button>
+			  {{else}}
+				${role}
+			{{/if}}
+
+
+		</TD>
+		<TD> ${regDate} </TD>
+		<TD>
+			<div id="${id}" class="hostsUser">
+				<button class="manageHostsUser" onclick="manageHostsOfUser(${id})" title="{{each hosts}} ${nameH} - {{/each}}"> Manage Hosts of User </button> 
+							
+			</div>
+		</TD>
+		<TD> {{if role != 'admin'}}
+				<button class="delUser" id="${id}"> Delete User </button> 
+			{{/if}}		
+		</TD> 
+	</TR>
+{{/each}}		
+</table>
+<br>
+
+{{if (ldapOK == 1) }}
+<p><button id="importFromLdap" onclick="importFromLdap()"> Import users from LDAP </button></p>
+{{/if}}
+
+<div id="dialog-usersAdmin" title="Delete the user ?">
+	<p>  Do you want to delete the selected user ? </p>
+</div>
+
+</div>

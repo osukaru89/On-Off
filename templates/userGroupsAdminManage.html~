@@ -1,0 +1,54 @@
+<div id="manageGroupsWrapper">
+
+	<div id="ug${idUserGroup}" class="userGroup">
+		<h1 class="header_bg"> ${nameUserGroup} (user group)  </h1>
+		
+		<p><button id="buttonDeleteGroup"> Delete group </button></p> 
+		<p> Use drag and drop or double click to move users </p>
+		
+	    <div id="search_zone">
+	
+		<div id="search_users">
+			<input type="text" name="searchUsers" id="searchUsers"/>
+		</div>
+		
+		<div id="button_search">
+			<button id="buttonSearchUsers"> Search ! </button>
+		</div>	
+		
+	    </div>
+		
+
+	    <div id="not-in-group" class="ui-widget-content ui-state-default">
+	 	<h4 class="header_bg"> Users (not in group) </h4>
+		<ul id="users" class="ui-helper-reset ui-helper-clearfix">
+			{{each notInGroup}}
+			<li id="${id}" class="users ui-widget-content ui-corner-tr">
+				<h5 class="header_bg2"> ${login} </h5>
+				<label> <b> ${email} </b> </label>
+				<p><label> Role : <b> ${role} </b> </label></p>
+			</li>
+			{{/each}}
+			
+		</ul>
+	    </div>
+		
+	    <div id="group" class="ui-widget-content ui-state-default">
+			<h4 class="header_bg"> Group </h4>
+		<ul id="usersinGroup" >
+			{{each inGroup}}
+			<li id="${id}" class="users ui-widget-content">
+				<h5 class="header_bg2"> ${login} </h5>
+				<label> <b> ${email} </b> </label>
+				<p><label> Role : <b> ${role} </b> </label></p>
+			</li>
+			{{/each}}
+		</ul>
+	    </div>
+		
+		<div id="dialog-userGroups" title="Delete this user group ?">
+			<p>  Do you want to delete the selected user group ? </p>
+		</div>
+		
+	</div>
+</div>

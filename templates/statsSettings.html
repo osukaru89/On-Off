@@ -1,0 +1,28 @@
+<div id="generalWrapper">
+
+    <div id="statsConfig">
+      <div id="header" class="header_bg"><h1>Stats Settings</h1></div>
+		<div id="main_area">
+		    
+		    <div id="texts_area">
+			<label> Time to keep statistics in database (in weeks, 0 => infinite) </label>
+			    <div class="separator"></div>
+			<label> Time (in minutes) between 2 updates of hosts uptime (between 1 and 20) : </label> 
+		    </div>
+
+		    <div id="inputs_area">
+			<input type="text" id="refresh" name="refresh" value="${refresh_minutes}"/>
+			     <div class="separator"></div>
+			<input type="text" name="nbWeeks" id="nbWeeks" value="${weeks_to_keep}"/>
+		    </div>
+
+		    <div id="buttons_area">
+			<div id="buttons_bar">
+			    <button id="buttonSaveStatConfig"> Save settings </button>
+			    <button id="buttonCancelStatConfig"> Cancel </button>
+			</div>
+		    </div>
+		</div>
+
+  </div>
+</div>

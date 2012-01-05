@@ -1,0 +1,82 @@
+	<div id=logo> 
+		<img src= img/logo.png></img> 
+	</div>
+	<div id=welcome>  
+		Welcome <b> ${username} </b> 
+	</div>
+	<div id=disconnect> 
+		<div style="float:right;">
+			<a onclick="logout()"> <img src= img/logout.png> </img> </a>
+		</div> 
+	</div>
+
+	<ul id="menu">
+		<li><padding/></li>
+		<li><a href="#"></a></li>
+		<li>
+			<a href="#" id="settings">Settings</a>
+			<ul>
+				<li><a href="#" id="ldapSettings" onclick="ldapConfig(true)"> LDAP Settings </a></li>
+				<li><a href="#" id="statSettings" onclick="statSettings()"> Statistics Settings </a></li>
+				<li><a href="#" onclick="manageMailing()"> Mailing Settings </a></li>
+				<li><a href="#" id="changePass" onclick="changePassword()">Change password</a></li>
+			</ul>
+		</li>
+		<li>
+ 			<a href="#" id="view">View</a>
+			<ul>
+				<li><a href="#" id="seehosts" onclick="seeAllHosts()">All hosts</a></li>
+				<li><a href="#" id="seefarms" onclick="seeAllFarms()">All farms</a></li>
+				<li><a href="#" id="seehosts" onclick="seeAllHostGroups()">All host groups</a></li>
+				<li><a href="#" id="seestats" onclick="seeAllStats()">Statistics</a></li>				
+				<li><a href="#" id="seelogs" onclick="seeLogs()"> Application logs </a></li>
+			</ul>
+		</li>
+		<li>
+			<a href="#" id="manage">Manage</a>
+			<ul>
+				<li><a href="#" onclick="manageHosts()"> Hosts</a></li>
+				<li><a href="#" onclick="manageUsers()"> Users</a></li>
+				<li>
+					<a href="#" id="farms"> Farms </a>
+					<ul id="ulfarms">
+						{{each farms}}	
+							<li> <a href="#" id="farm${id}" onclick="farm(${id})"> ${name} </a></li>				
+						{{/each}}
+							<li> <a href="#" id="createNewFarm" onclick="createFarm()"> ++ CREATE NEW ++ </a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#" id="usergroups"> Usergroups </a>
+					<ul id="ulusergroups">
+						{{each userGroups}}	
+							<li> <a href="#" id="usergroup${idUserGroup}" onclick="usergroups(${idUserGroup})"> ${nameUserGroup} </a></li>				
+						{{/each}}
+							<li> <a href="#" id="createNewUserGroup" onclick="createUserGroup()"> ++ CREATE NEW ++ </a></li>		
+					</ul>
+				</li>
+				<li>
+					<a href="#" id="hostgroups"> Hostgroups </a>
+					<ul id="ulhostgroups">
+						{{each hostGroups}}	
+							<li> <a href="#" id="hostgroup${idHostGroup}" onclick="hostgroups(${idHostGroup})"> ${nameHostGroup} </a></li>				
+						{{/each}}
+							<li> <a href="#" id="createNewHostGroup" onclick="createHostGroup()"> ++ CREATE NEW ++ </a></li>
+					</ul>
+				</li>
+				<li><a href="#" onclick="managePermissions()"> Groups permissions </a></li>
+				<li><a href="#" id="schedule" onclick="schedule()"> Scheduled Tasks</a></li>
+				<li><a href="#" onclick="manageInvits()"> Invitations </a></li>
+			</ul>
+		</li>
+		<li>
+			<a href="#" id="help"> Help </a>
+			<ul>
+				<li><a href="#" onclick="helpUser()" id="adminManual"> User Manual </a></li>
+				<li><a href="#" onclick="helpAdmin()" id="userManual"> Admin Manual </a></li>
+				<li><a href="#" onclick="helpAboutOnOff()" id="onOffAbout"> About On/Off </a></li>
+				<li><a href="#" onclick="helpAboutWol()" id="wolAbout"> About Wake on Lan </a></li>
+				<li><a href="#" onclick="helpSetupWol()" id="wolManual"> Wol Setup Manual </a></li>
+			</ul>
+		</li>
+	</ul>

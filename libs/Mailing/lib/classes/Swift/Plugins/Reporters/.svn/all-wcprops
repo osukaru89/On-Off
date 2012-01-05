@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/wol/!svn/ver/58/trunk/php-wol-2.0/libs/Mailing/lib/classes/Swift/Plugins/Reporters
+END
+HitReporter.php
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/wol/!svn/ver/58/trunk/php-wol-2.0/libs/Mailing/lib/classes/Swift/Plugins/Reporters/HitReporter.php
+END
+HtmlReporter.php
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/wol/!svn/ver/58/trunk/php-wol-2.0/libs/Mailing/lib/classes/Swift/Plugins/Reporters/HtmlReporter.php
+END

@@ -1,0 +1,88 @@
+<div id="invitations">
+	<h1> Invitations : </h1>
+
+	<table>
+		<tr>
+			<th> id </th>
+			<th> people </th>
+			<th> project </th>
+			<th> hash </th>
+			<th> can power </th> 
+			<th> date begin </th>
+			<th> date end </th> 
+			<th> email sent to </th> 
+			<th> delete </th>
+		</tr>
+
+		{{each invitations}}
+		<tr id="${id}">
+			<td> ${id} </td>
+			<td> ${peopleName} </td>
+			<td> ${projectName} </td>
+			<td> ${hash} </td>
+			<td> <b>${nameSubj}</b> (${typeSubj}) </td> 
+			<td> ${begin} </td>
+			<td> ${end} </td> 
+			<td> ${email}</td> 	
+			<td> <button class="delInvit" id="${id}"> Delete </button> </td>
+		</tr>
+		{{/each}}
+
+		<div id="dialog-invitation" title="Delete the invitation ?">
+			<p> Do you want to delete the selected invitation ? </p>
+		</div>
+		
+	</table>
+	
+	<h3> Add new invitation : </h3>
+	<div id="error" class='ui-state-error ui-corner-all' style='margin-top: 20px; padding: 0 .7em;'>  </div>
+	<div id="addInvitation">
+		<p>
+			<label> People Name : </label> 
+			<input type="text" name="people" id="people"/>
+		</p>
+		<p>
+			<label> Project Name : </label> 
+			<input type="text" name="project" id="project"/>
+		</p>
+
+		<p>
+			<div id="hostOrFarm">
+				<input type="radio" id="hostChoice" name="radio5" checked="checked"/><label for="hostChoice"> Host </label>
+				<input type="radio" id="farmChoice" name="radio5"/><label for="farmChoice"> Farm </label>
+			</div>
+
+			<div id="ifHost">
+				<select id="allHosts" class="schedSelect">
+					{{each hosts}}
+					<option value="${idH}">${nameH}</option>
+					{{/each}}	
+				</select>
+			</div>	
+
+			<div id="ifFarm">
+				<select id="allFarms" class="schedSelect">
+					{{each farms}}
+					<option value="${id}">${name}</option>
+					{{/each}}	
+				</select>
+			</div>
+		</p>
+		
+		<p>Date begin : <input type="text" id="dateBegin" readonly></p>				
+
+		<p>Date end : <input type="text" id="dateEnd" readonly></p>	
+				
+		<p>
+			<label> Email to send invitation : </label> 
+			<input type="text" name="email" id="email"/>
+		</p>
+		
+		<p>
+			<button id="createInvit"> Create invitation and send email </button>		
+		</p>
+
+	</div>
+
+</div>
+

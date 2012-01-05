@@ -1,0 +1,275 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/wol/!svn/ver/58/trunk/php-wol-2.0/templates
+END
+menuheader.html
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/wol/!svn/ver/58/trunk/php-wol-2.0/templates/menuheader.html
+END
+sentTurnOff.html
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/wol/!svn/ver/51/trunk/php-wol-2.0/templates/sentTurnOff.html
+END
+addHostNameForUserForm.html
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/wol/!svn/ver/51/trunk/php-wol-2.0/templates/addHostNameForUserForm.html
+END
+changeEmailForm.html
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/wol/!svn/ver/51/trunk/php-wol-2.0/templates/changeEmailForm.html
+END
+changeOwnerForm.html
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/wol/!svn/ver/51/trunk/php-wol-2.0/templates/changeOwnerForm.html
+END
+helpUser.html
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/wol/!svn/ver/57/trunk/php-wol-2.0/templates/helpUser.html
+END
+addHostGroupForm.html
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/wol/!svn/ver/51/trunk/php-wol-2.0/templates/addHostGroupForm.html
+END
+farmSettingsForm.html
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/wol/!svn/ver/51/trunk/php-wol-2.0/templates/farmSettingsForm.html
+END
+changePasswordForm.html
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/wol/!svn/ver/51/trunk/php-wol-2.0/templates/changePasswordForm.html
+END
+groupsPermissionsAdminManage.html
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/wol/!svn/ver/51/trunk/php-wol-2.0/templates/groupsPermissionsAdminManage.html
+END
+userGroupsAdminManage.html
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/wol/!svn/ver/53/trunk/php-wol-2.0/templates/userGroupsAdminManage.html
+END
+helpAdmin.html
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/wol/!svn/ver/50/trunk/php-wol-2.0/templates/helpAdmin.html
+END
+statsCustomHostAllDays.html
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/wol/!svn/ver/51/trunk/php-wol-2.0/templates/statsCustomHostAllDays.html
+END
+viewAllHostGroups.html
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/wol/!svn/ver/37/trunk/php-wol-2.0/templates/viewAllHostGroups.html
+END
+changeIpForm.html
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/wol/!svn/ver/51/trunk/php-wol-2.0/templates/changeIpForm.html
+END
+invitations.html
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/wol/!svn/ver/50/trunk/php-wol-2.0/templates/invitations.html
+END
+forgotPasswordForm.html
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/wol/!svn/ver/51/trunk/php-wol-2.0/templates/forgotPasswordForm.html
+END
+addHostForm.html
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/wol/!svn/ver/51/trunk/php-wol-2.0/templates/addHostForm.html
+END
+addUserForm.html
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/wol/!svn/ver/51/trunk/php-wol-2.0/templates/addUserForm.html
+END
+scheduleNewTasks.html
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/wol/!svn/ver/57/trunk/php-wol-2.0/templates/scheduleNewTasks.html
+END
+statsSettings.html
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/wol/!svn/ver/57/trunk/php-wol-2.0/templates/statsSettings.html
+END
+invitPageForExternUser.html
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/wol/!svn/ver/56/trunk/php-wol-2.0/templates/invitPageForExternUser.html
+END
+addDiscoveredHostForm.html
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/wol/!svn/ver/51/trunk/php-wol-2.0/templates/addDiscoveredHostForm.html
+END
+addFarmForm.html
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/wol/!svn/ver/51/trunk/php-wol-2.0/templates/addFarmForm.html
+END
+farmsListHosts.html
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/wol/!svn/ver/51/trunk/php-wol-2.0/templates/farmsListHosts.html
+END
+userHostsRelationshipsAdminManage.html
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/wol/!svn/ver/51/trunk/php-wol-2.0/templates/userHostsRelationshipsAdminManage.html
+END
+addUserGroupForm.html
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/wol/!svn/ver/51/trunk/php-wol-2.0/templates/addUserGroupForm.html
+END
+scheduledTasksAdminManage.html
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/wol/!svn/ver/51/trunk/php-wol-2.0/templates/scheduledTasksAdminManage.html
+END
+changeMacForm.html
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/wol/!svn/ver/51/trunk/php-wol-2.0/templates/changeMacForm.html
+END
+farmsAdminManage.html
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/wol/!svn/ver/51/trunk/php-wol-2.0/templates/farmsAdminManage.html
+END
+hostsDiscoverList.html
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/wol/!svn/ver/51/trunk/php-wol-2.0/templates/hostsDiscoverList.html
+END
+helpSetupWol.html
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/wol/!svn/ver/50/trunk/php-wol-2.0/templates/helpSetupWol.html
+END
+changeRoleForm.html
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/wol/!svn/ver/51/trunk/php-wol-2.0/templates/changeRoleForm.html
+END
+sentWol.html
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/wol/!svn/ver/51/trunk/php-wol-2.0/templates/sentWol.html
+END
+hostsList.html
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/wol/!svn/ver/51/trunk/php-wol-2.0/templates/hostsList.html
+END
+hostGroupsAdminManage.html
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/wol/!svn/ver/51/trunk/php-wol-2.0/templates/hostGroupsAdminManage.html
+END
+logsList.html
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/wol/!svn/ver/51/trunk/php-wol-2.0/templates/logsList.html
+END
+statsBeginPage.html
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/wol/!svn/ver/51/trunk/php-wol-2.0/templates/statsBeginPage.html
+END
+statsCustomDayAllHosts.html
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/wol/!svn/ver/51/trunk/php-wol-2.0/templates/statsCustomDayAllHosts.html
+END
+helpAboutWol.html
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/wol/!svn/ver/50/trunk/php-wol-2.0/templates/helpAboutWol.html
+END
+ldapConfig.html
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/wol/!svn/ver/51/trunk/php-wol-2.0/templates/ldapConfig.html
+END
+viewMailContent.html
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/wol/!svn/ver/58/trunk/php-wol-2.0/templates/viewMailContent.html
+END
+hostsAdmin.html
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/wol/!svn/ver/50/trunk/php-wol-2.0/templates/hostsAdmin.html
+END
+usersAdmin.html
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/wol/!svn/ver/50/trunk/php-wol-2.0/templates/usersAdmin.html
+END
+helpAboutOnOff.html
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/wol/!svn/ver/50/trunk/php-wol-2.0/templates/helpAboutOnOff.html
+END

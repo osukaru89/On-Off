@@ -1,0 +1,80 @@
+<div id="helpUser">
+
+	<h1> Users interface : </h1>
+
+	<h2> Registration : </h2>
+		<p> Users cannot register to On/Off application. You need to create yourself an account for them. Their login and password will be sent to them by email. Please, tell them they need to change their password and choose a strong one. </p>
+		<p> You can also use a LDAP database to authenticate them, as it is explained at the end of this page. </p> 
+		
+	<h2> Connection : </h2>
+		<p> Go to the application's main page. If you cannot see the window login, it means that your web browser does not support javascript and jquery. Please, download and use a recent version of Firefox or Chromium browser.
+
+	<h2> Functionalities of users' web interface : </h2>
+		<p> With On/Off, registered users can see the status, power on or turn off :
+		<ul>
+			<li> All the hosts linked to you by the admin </li>
+			<li> All the hosts in farms you are member of </li>
+			<li> All the groups with access level lower than access level of a group you are member of </li>
+		</ul>
+		You have to manage these groups and farms, and to create relationships between users and hosts. </p>
+
+	<br>
+
+	<h1> Admin interface : </h1>
+
+	<h2> Settings : </h2>
+		<ul>
+			<li> <b> LDAP Settings </b> : if your company has a LDAP network, you can configure parameters here.
+				<ul>
+					<li> Host : The name of IP of the LDAP server </li>
+					<li> Port : The port number of LDAP (generally, 389) </li>
+					<li> Base DN : The base of your LDAP tree </li>
+					<li> Bind DN : The user allowed to search the LDAP tree </li>
+					<li> Bind Password : This user's password </li>
+					<li> Users DN : The directory to search users </li>
+					<li> Name of login attribute : generally, it is <b> cn </b> </li>
+					<li> Name of password attribute : generally, <b> userpassword </b> </li>
+					<li> Name of email attribute : generally, <b> mail </b> </li>
+					<li> Name of ID attribute : generally, <b> uid </b> </li>
+				</ul>
+			</li>
+			<li> <b> Statistics settings </b> : choose settings of how the server will get and keep uptimes.
+				<ul>
+					<li> Time to keep statistics in database : enter 0 to keep everything, and a positive number of weeks to delete every week (at 0:00) the older weeks. </li>					
+					<li> Time (in minutes) between 2 updates of hosts uptime : to choose the period of the periodic script that updates in the database the uptime of connected hosts. </li>					
+				</ul>
+			 </li>
+			<li> <b> Change password </b> : as On/Off's admin, you need to choose a very strong password, and of possible change it sometimes. </li>
+			<li> <b> Scheduled tasks </b> : see all the tasks that have been scheduled by you or other admins. It is also here that you can delete them. When you click on the button, the corresponding task will highlight and a window will be opened to ask you confirmation. </li>
+			<li> <b> Schedule </b> : the interface to create scheduled tasks to wake on or turn off hosts, or all hosts being part of a farm or group. You can choose to run the task every day of week or only some custom days. The same for days of month and months. But you need to choose the minute and hour the task will be run. A message of "successful scheduling" will be printed to you if the task has been registered in the database. </li> 
+		</ul>
+		
+	<h2> View : </h2>
+		<ul>
+			<li> <b> All hosts </b> : here you can view the list and status of all known hosts, power them on and turn them off. </li>
+			<li> <b> All farms </b> : to view all the farms with hosts being part of each one, and turn off/wake on all hosts or the entire farm. </li>
+			<li> <b> All host groups </b> : the same as "All farms", but for host groups... </li>
+			<li> <b> Statistics </b> : here you will be able to see uptimes : all daily uptimes for a custom host, or all hosts uptimes for a custom day. </li>
+			<li> <b> Application logs </b> : All the main actions you and other users can do on the application are registered in the database, with their date, their author and short information. You can see them on this page, and make searchs by type of action, author or date. Everything happening on the system will be kept in memory ! </li>
+		</ul>
+		
+	<h2> Manage : </h2>
+		<ul>
+			<li> <b> Hosts </b> : The page to register new host with its properties (name, mac, ip and owner), to change these properties (apart from the name), and to delete them. For every change or deletion, a confirmation window will be opened and the selected user will be hightlighted. You can also use the "Discover Hosts" tool to scan the local network and import new hosts in one click ! </li>
+			<li> <b> Users </b> : On this page, you will be able to add new users (with email, login and password), delete them and also change their email and role. For every change or deletion, a confirmation window will be opened and the selected user will be hightlighted. If you click on the "Manage Hosts of user" button, you will be able to drag and drop hosts on this user (or double click on them), to create or delete relationships between hosts and users. You can also import users from LDAP database. Note that it is not necessary for users to login on the application : when a LDAP user who does not exist in On/Off in the database tries to connect, he is automatically added in it and logged in. The "import button" is here only to allow you to add users in farms or groups and to create link with hosts before their first connection. </li>
+			<li> <b> Farms/Usergroups/Hostgroups </b> : You can select on the menu every farm, or create a new farm. On the farm's page, you will be able to drag and drop hosts and users in the farm/group, or put them out. You can also use double click. </li>
+			<li> <b> Groups permissions </b> : On this page you will be able to change access level of every group of hosts or users. By clicking on a host group you will hightlight all the user groups that have permissions on it, and by clicking on a user group, the hosts groups it has permissions on will be highlighted. </li>
+			<li> <b> Invitations </b> : To send and manage invitations : you can create an invitation, with dates of begin and end, to allow an external user to wake on hosts or farms, with a randomly generated hash, sent by email. </li>
+		</ul>
+
+	<h2> User page : </h2>
+		<p> To see only your own hosts and the farms you are part of, as every user can do. </p>
+
+	<br>
+
+	<h1> Warnings : </h1>
+		<ul>
+			<li> The On/Off application uses Cron to schedule tasks. Cron runs a script named "calledByCron.php" every minute, and this script checks if he has something to do on the current minute of the current hour, of the current day of month/week of the current months. A second script (daemonGetStatus.php) is also run, to update the status of each host, update dynamic IPs and update uptimes. Be careful, if you delete this line from your crontab, hosts status will be wrong and all the scheduled tasks will be useless. </li>
+			<li> If the page refreshs, you are logged out. That is why the "F5" key has been handled to call a "custom" refresh function. But if you click on the "back" button of your web browser, you will be logged out. </li>
+		</ul>	
+		

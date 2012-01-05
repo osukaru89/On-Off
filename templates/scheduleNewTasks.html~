@@ -1,0 +1,94 @@
+<div id="scheduleNewTasks">
+	<h1 class="header_bg"> Scheduler : </h1>
+
+	<label class="schedLabel"> Action :</label>
+	<div id="onoff">
+		<input type="radio" id="wakeon" name="radio1" checked="checked"/><label for="wakeon"> Wake On LAN </label>
+		<input type="radio" id="turnoff" name="radio1"/><label for="turnoff"> Turn Off </label>
+	</div>
+	<br><br><br>
+
+	<label class="schedLabel"> Days of Week :</label>
+	<div id="dowallcustom">
+		<input type="radio" id="dowall" name="radio2" checked="checked"/><label for="dowall"> All </label>
+		<input type="radio" id="dowcustom" name="radio2"/><label for="dowcustom"> Custom </label>
+	</div>
+	<div id="dow">
+		<input type="checkbox" name="mon" id="dow1"/><label for="dow1">Mon</label>
+		<input type="checkbox" name="tue" id="dow2"/><label for="dow2">Tue</label>
+		<input type="checkbox" name="wed" id="dow3"/><label for="dow3">Wed</label>
+		<input type="checkbox" name="thu" id="dow4"/><label for="dow4">Thu</label>
+		<input type="checkbox" name="fri" id="dow5"/><label for="dow5">Fri</label>
+		<input type="checkbox" name="sat" id="dow6"/><label for="dow6">Sat</label>
+		<input type="checkbox" name="sun" id="dow7"/><label for="dow7">Sun</label>
+	</div>
+	<br><br><br>
+
+	<label class="schedLabel"> Days of Month :</label>
+	<div id="domallcustom">
+		<input type="radio" id="domall" name="radio3" checked="checked"/><label for="domall"> All </label>
+		<input type="radio" id="domcustom" name="radio3"/><label for="domcustom"> Custom </label>
+	</div>
+	<div id="dom"></div>
+	<br><br><br>
+
+	<label class="schedLabel"> Months :</label>
+	<div id="monthsallcustom">
+		<input type="radio" id="monthsall" name="radio4" checked="checked"/><label for="monthsall"> All </label>
+		<input type="radio" id="monthscustom" name="radio4"/><label for="monthscustom"> Custom </label>
+	</div>
+	<div id="months">
+		<input type="checkbox" name="jan" id="month1"/><label for="month1">Jan</label>
+		<input type="checkbox" name="feb" id="month2"/><label for="month2">Feb</label>
+		<input type="checkbox" name="mar" id="month3"/><label for="month3">Mar</label>
+		<input type="checkbox" name="apr" id="month4"/><label for="month4">Apr</label>
+		<input type="checkbox" name="may" id="month5"/><label for="month5">May</label>
+		<input type="checkbox" name="jun" id="month6"/><label for="month6">Jun</label>
+		<input type="checkbox" name="jul" id="month7"/><label for="month7">Jul</label>
+		<input type="checkbox" name="aug" id="month8"/><label for="month8">Aug</label>
+		<input type="checkbox" name="sep" id="month9"/><label for="month9">Sep</label>
+		<input type="checkbox" name="oct" id="month10"/><label for="month10">Oct</label>
+		<input type="checkbox" name="nov" id="month11"/><label for="month11">Nov</label>
+		<input type="checkbox" name="dec" id="month12"/><label for="month12">Dec</label>
+	</div>
+	<br><br><br>
+
+	<div id="time">
+		<label class="schedLabel"> At :</label>
+		<select id="hours" class="schedSelect"></select>
+		<select id="minutes" class="schedSelect"></select>
+	</div>
+	<br><br><br>
+
+	<div id="hostFarmOrGroup">
+		<input type="radio" id="hostChoice" name="radio5" checked="checked"/><label for="hostChoice"> Host </label>
+		<input type="radio" id="farmChoice" name="radio5"/><label for="farmChoice"> Farm </label>
+		<input type="radio" id="groupChoice" name="radio5"/><label for="groupChoice"> Group </label>
+	</div>
+
+	<div id="ifHost">
+		<select id="allHosts" class="schedSelect">
+			{{each hosts}}
+				<option value="${idH}">${nameH}</option>
+			{{/each}}	
+		</select>
+	</div>
+
+	<div id="ifFarm">
+		<select id="allFarms" class="schedSelect">
+			{{each farms}}
+				<option value="${id}">${name}</option>
+			{{/each}}	
+		</select>
+	</div>
+
+	<div id="ifGroup">
+		<select id="allGroups" class="schedSelect">
+			{{each groups}}
+				<option value="${idHostGroup}">${nameHostGroup}</option>
+			{{/each}}	
+		</select>
+	</div>
+	<br><br><br>
+
+	<button id="scheduleButton"> Schedule ! </button>

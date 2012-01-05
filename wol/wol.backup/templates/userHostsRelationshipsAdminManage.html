@@ -1,0 +1,33 @@
+<div id="u${id}" class="hostsOfUser">
+	<h1> ${login} (${role}) </h1>
+   <p><button onclick="manageUsers()"> Back to users management page </button></p>
+	<ul id="hosts" class="ui-helper-reset ui-helper-clearfix">
+		<h4 class="ui-widget-header"> Other hosts </h4>
+		<p>
+			<input type="text" name="searchHosts" id="searchHosts"/>
+			<button id="buttonSearchHosts"> Search ! </button>
+		</p>
+		{{each others}}
+		<li id="${idH}" class="hosts ui-widget-content ui-corner-tr">
+			<h5 class="header_bg"> ${nameH} </h5>
+			<label> MAC : <b> ${mac} </b> </label>
+			<label> Owner : <b> ${ownername} </b> </label>
+		</li>
+		{{/each}}
+	</ul>
+	
+	<div id="group" class="ui-widget-content ui-state-default">
+		<h4 class="ui-widget-header"> Hosts associated with ${login} </h4>
+		<ul id="hostsinGroup">	
+		{{each associated}}
+			<li id="${idH}" class="hosts ui-widget-content ui-corner-tr">
+				<h5 class="header_bg"> ${nameH} </h5>
+				{{if customName}} <label> Name for this user : <b> ${customName} </b> </label> {{/if}}
+				<label> MAC : <b> ${mac} </b> </label>
+				<label> Owner : <b> ${ownername} </b> </label>
+				<button class="buttonHostnameForUser" onclick="nameHostForUser(${id}, '${login}', ${idH}, {{if customName}} '${customName}' {{else}} '${nameH}' {{/if}})"> Give custom name</button>
+			</li>
+		{{/each}}
+		</ul>
+	</div>
+</div>

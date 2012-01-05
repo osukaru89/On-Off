@@ -1,0 +1,42 @@
+<h1> Hosts : </h1>
+<table>
+	<TR>
+		<TH> number </TH>
+		<TH> name </TH>
+		<TH> MAC </TH>
+		<TH> IP </TH>
+		<TH> owner </TH>
+		<TH> delete </TH>
+	</TR>
+	{{each hosts}}
+	<TR id="${idH}">
+		<TD> ${idH} </TD>
+		<TD> ${nameH} </TD>
+		<TD> <div id="macHostAdmin${idH}">${mac}</div>
+         <button class="ui-state-default ui-corner-all" title="change Mac" onclick="changeMac(${idH}, '${nameH}')">
+         	<span class="ui-icon ui-icon-transferthick-e-w"> </span>
+         </button>
+		</TD>
+		<TD> <div id="ipHostAdmin${idH}">${ip}</div>
+        	<button class="ui-state-default ui-corner-all" title="change IP" onclick="changeIP(${idH}, '${nameH}')">
+        		<span class="ui-icon ui-icon-transferthick-e-w"></span>
+         </button>
+		</TD>
+		<TD> <div id="ownerHostAdmin${idH}">${ownername}</div>
+         <button class="ui-state-default ui-corner-all" title="change Owner" onclick="changeOwner(${idH}, '${nameH}')"> 
+         	<span class="ui-icon ui-icon-transferthick-e-w"> </span>
+         </button>
+      </TD>
+ 		<TD>    
+ 			<button class="delHost" id="${idH}"> Delete Host </button>
+ 		</TD>
+ 	</TR>
+ 	{{/each}}
+
+</table>
+<br><br>
+<button id="hostsDiscover">Discover hosts on local network</button>
+<div id="dialog-hostsAdmin" title="Delete the host ?">
+	<p> Do you want to delete the selected host ? </p>
+</div>
+

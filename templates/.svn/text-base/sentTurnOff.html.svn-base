@@ -1,0 +1,6 @@
+<div id="turnOffSend"> 
+	<p><i>A turn off packet has been send to the ${htype} <b> ${hname} </b> </i> </p>
+	<p>All the connected users have been shown a message.<br>
+	If nobody clicks on the cancel button in the next minutes<br>
+	it will be automatically turned off</p>
+</div>

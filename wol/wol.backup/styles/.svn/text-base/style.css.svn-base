@@ -1,0 +1,504 @@
+html{
+	margin: 0;
+   padding: 0;
+   height:100%;
+}
+
+body{ 
+	font: 80% "Trebuchet MS", sans-serif;
+   margin: 2px;
+   padding: 0;
+   height:100%;
+ 	background-color: #FFEECC;
+   padding-bottom: 50px;
+}
+
+p {
+	clear: both;
+	width: 100%;
+}
+
+#allPage {
+ 	position: relative;
+   min-height:100%;
+}
+
+
+/* Structure */
+
+header {
+	z-index: 10;
+	position: fixed;
+	width:100%;
+	top:0;
+	background-color: #CCCCCC;
+	min-height: 40px;
+}
+
+footer {
+	z-index: 10;
+	position: fixed;
+   width:100%;
+   bottom:0;
+	background-color: #CCCCCC;
+}
+
+#messages {
+   padding-top: 50px;
+}
+
+#content {
+	position: absolute;
+	width: 100%;
+   min-height: 100%;
+}
+
+/* Header */
+			
+#logo { 
+	float:left; 
+	width: 50px;
+	position: absolute;
+	left: 10px; 
+}
+			
+#disconnect { 
+	float:right; 
+	width: 50px;
+	margin-right: 10px;
+}
+
+#welcome { 
+	position:absolute;
+	font: 140% "Trebuchet MS", sans-serif;
+	color: #FFEEAA;
+	float: right;
+	right: 65px;
+	top: 10px;
+}
+			
+
+/* User page */
+			
+#userHostsCol {
+	width: 40%; 
+	float: left;
+} 
+
+#userFarmsCol { 
+	width: 40%; 
+	float: right;
+}
+
+
+/* Tables style (for admin and user pages) */
+
+table {
+	border: medium solid #CC0000;
+	border-collapse: collapse;
+}
+
+th {
+	font-family: monospace;
+	border: thin solid #FF6600;
+	padding: 10px;
+	text-align: center;
+	background-color: #FF9900;
+}
+
+tr {
+	font-family: sans-serif;		
+	border: thin solid #FF6600;
+	padding: 5px;
+	text-align: center;
+	background-color: #FF9900;
+}
+
+td {
+	font-family: sans-serif;
+	border: thin solid #FF6600;
+	padding: 5px;
+	text-align: center;
+	background-color: #FFFFAA;
+}
+
+
+/* Forms */
+
+label {
+	float: left;
+	text-align: right;
+}
+
+input {
+	float: right;
+	text-align: left;
+	background-color: #FFDD88;
+}
+
+option {
+	color: #FFDD88;
+	background-color: #000000;
+	text-align: right;
+}
+
+select {
+	color : #000000;
+	background-color: #FFDD88;
+	float: right;
+	text-align: right;
+}
+
+#formaddusergroup, #formadduser, #formaddhost, #formaddfarm, #formaddhostuser, #changePassword {
+	width: 50%;
+}
+
+#changePassword {
+	position: absolute;
+	top: 20%;
+	text-align: center;	
+}
+
+
+
+/* Buttons */	
+			
+#recoButton {
+	width: 100%;
+	position: absolute;
+	top: 40%;
+	text-align: center;	
+}
+			
+button, a { 
+	text-align: center; 
+}
+
+.buttonHostnameForUser {
+	font: 70% "Trebuchet MS", sans-serif; 	
+}
+
+							
+*/
+/* Style for JQuery UI elements */
+
+fieldset { 
+	padding:0; 
+	border:0; 
+	margin-top:25px; 
+}
+
+.ui-dialog .ui-state-error { 
+	padding: .3em; 
+}
+
+.validateTips { 
+	border: 1px solid transparent; 
+	padding: 0.3em; 
+}
+
+
+/* Groups and Farms Management : */
+
+/* User groups : */
+#users {
+    float: left;
+    height: 100%;
+    min-height: 18em;
+    width: 50%;
+    position: absolute;
+} * html #users { height: 18em; } /* IE6 */
+
+#users.custom-state-active { 
+	background: #E80;
+}
+
+#users li { 
+	float: left; 
+	width: 128px; 
+	padding: 0.4em; 
+	margin: 0 0.4em 0.4em 0; 
+	text-align: center; 
+	height: 50px; 
+}
+	
+#users li h5 { 
+	margin: 0 0 0.4em; 
+	cursor: move; 
+}
+
+#users li a { 
+	float: left; 
+}
+
+#users li img { 
+	width: 100%; 
+	cursor: move; 
+}
+	
+#users li label { 
+	width: 100%; 
+	cursor: move; 
+}
+
+#users li label { 
+	font: 80% "Trebuchet MS", sans-serif; 
+}
+		
+#users .inGroup { 
+	width: 200%; 
+}
+
+/* Host Groups : */
+
+#hosts { 
+	float: left; 
+	width: 50%; 
+	min-height: 18em;
+	height:100%;
+   position: absolute;
+} * html #hosts { height: 18em; } /* IE6 */
+
+#hosts.custom-state-active { 
+	background: #E80; 
+}
+
+#hosts li { 
+	float: left; 
+	width: 128px; 
+	padding: 0.4em; 
+	margin: 0 0.4em 0.4em 0; 
+	text-align: center; 
+	height: 50px; 
+}
+	
+#hosts li h5 { 
+	margin: 0 0 0.4em; 
+	cursor: move; 
+}
+
+#hosts li a { 
+	float: left; 
+}
+
+#hosts li img { 
+	width: 100%; 
+	cursor: move; 
+}
+	
+#hosts li label { 
+	width: 100%; 
+	cursor: move; 
+}
+
+#hosts li label { 
+	font: 80% "Trebuchet MS", sans-serif; 
+}
+		
+#hosts .inGroup { 
+	width: 200%; 
+}
+
+/* User & Host Groups : */
+#group { 
+	float: right; 
+	width: 45%; 
+	min-height: 18em; 
+	padding: 1%;
+	height:100%;
+} * html #group { height: 18em; } /* IE6 */
+
+#group h4 { 
+	line-height: 16px; 
+	margin: 0 0 0.4em; 
+}
+
+#group li h5 { 
+	margin: 0 0 0.4em; 
+	cursor: move; 
+}
+	
+#group li { 
+	float: left; 
+	width: 128px; 
+	padding: 0.4em; 
+	margin: 0 0.4em 0.4em 0; 
+	text-align: center;
+	height: 50px; 
+}	
+	
+#group li label { 
+	cursor: move; 
+}
+
+#usersinGroup label, #users label { 
+	font: 80% "Trebuchet MS", sans-serif; 
+	color: blue; 
+	text-align: left; 
+	float: left;
+}
+
+#hostsinGroup label, #hosts label { 
+	font: 80% "Trebuchet MS", sans-serif; 
+	color: green;
+	text-align: left; 
+	float: left;
+}
+
+/* Farms : */
+
+#farmContent { 
+	float: left; 
+	width: 100%; 
+	min-height: 18em; 
+	height:100%;
+} * html #farmContent { height: 18em; } /* IE6 */
+
+#farmContent h4 { 
+	line-height: 16px; 
+	margin: 0 0 0.4em; 
+}
+
+#farmContent li h5 { 
+	margin: 0 0 0.4em; 
+	cursor: move; 
+}
+	
+#farmContent li { 
+	float: left; 
+	width: 128px; 
+	padding: 0.4em; 
+	margin: 0 0.4em 0.4em 0; 
+	text-align: center; 
+	height: 50px; 
+}	
+	
+#farmContent li label { 
+	cursor: move; 
+}
+
+.farm {
+    position: absolute;
+}
+.farm #hosts {
+    float: left;
+    height: 100%;
+    position: absolute;
+    width: 24%;
+}
+.farm #users {
+    float: right;
+    height: 100%;
+    position: absolute;
+    right: 0px;
+    width: 24%;
+}
+.farm #farmContent {
+    margin-left: 25%;
+    margin-right: 25%;
+    min-height: 100%;
+    position: relative;
+    width: 50%;
+}
+
+#spacer {
+	clear:both;
+}
+
+/* scheduling style : */ 
+
+.schedLabel {
+	min-width: 10%;
+	text-align: center;
+	vertical-align: middle;
+	color: #993300;
+}
+#dowallcustom, #onoff, #domallcustom, #monthsallcustom  {
+	min-width: 30%;
+}
+
+#dow, #dom, #months {
+	position: relative;
+	left: 10px;
+}
+
+#dom { 
+	 font: 80% "Trebuchet MS", sans-serif;
+}
+
+.schedSelect {
+	position: relative;
+	left: 10px;
+	float: left;
+	text-align: right;
+}
+
+
+/* Groups permissions management : */
+#userGroupsPerms {
+	float: left;
+	width: 48%;
+}
+
+#hostGroupsPerms {
+	float: right;
+	width: 48%;
+}
+
+.userGroupPerm, .hostGroupPerm {
+	font: 80% "Trebuchet MS", sans-serif;
+	width:100%;
+	height:130px;
+}
+
+.sliderperm {
+	margin-top: 10px;
+	width: 75%;	
+	float: left;
+}
+
+#bigLabel {
+	font: 140% "Trebuchet MS", sans-serif;
+}
+
+#changeUserGroupLevelPerm, #changeHostGroupLevelPerm {
+	margin-top: 3px;
+	width: 20%;
+	float: right;
+}
+
+.havePermH, .donthavePermH, .havePermU, .donthavePermU {
+	font-weight: bold;
+	position: relative;
+	left: 10px;
+}
+
+.donthavePermH, .donthavePermU {
+	font-weight: bold;
+	color: green;
+}
+
+#ldapConfig {
+	max-width: 500px;	
+}
+
+#statsConfig {
+	max-width: 700px;	
+}
+
+#addInvitation {
+	max-width: 500px;	
+}
+
+#wait {
+	z-index: 20000;
+	text-align: center;
+	position: fixed;
+	left: 50%;
+	top: 50%;
+}
+
+.toClear {
+	clear: both;
+	display: block;
+}

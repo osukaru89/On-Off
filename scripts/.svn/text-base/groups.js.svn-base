@@ -1,0 +1,761 @@
+/// User groups functions :
+
+/**
+ * Gets a usergroup's data, and generates a page to manage it, adding or removing users.
+ * Calls the action getUserGroups
+ * Uses the template "userGroupsAdminManage.html"
+ * Contains 2 functions : addToGroup( $item ) and removeFromGroup( $item ) to add an user in the group or remove it.
+ * @function
+ * @param {Number} id The id of the group we want to manage
+ */
+function usergroups(id) {
+	deletePeriodicGetStatus();
+	$.ajax({
+		url: "?ajax=true&action=getUserGroups",
+		type: 'post',
+		data: 'id=' + id,
+		success: function(data){	
+			var saveData = data;
+
+			var i=0, j=0;
+			saveData.notInGroup = new Array();
+			saveData.inGroup = new Array();
+			
+			for (var au in saveData.allUsers) {	
+				var inGrp = false;		
+				for (var uig in saveData.usersInGroup) {
+					if (saveData.usersInGroup[uig] === saveData.allUsers[au].id) {
+						saveData.inGroup[i++]=saveData.allUsers[au];
+						inGrp = true;
+					}
+				}
+				if (! inGrp) {
+					saveData.notInGroup[j++]=saveData.allUsers[au];
+				}
+			}
+			
+			$.get('templates/userGroupsAdminManage.html', function(data) {
+				$('#content').html( $.tmpl(data, saveData) );
+				
+				$( "#dialog-userGroups" ).dialog({
+					autoOpen: false,
+					resizable: false,
+					height:240,
+					modal: true,
+					buttons: {
+						"OK": function() {
+							deleteUserGroup ($(".userGroup")[0].id);
+							$(this).dialog("close");
+						},
+						Cancel: function() {
+							$(this).dialog("close");
+						}
+					}
+				});
+						
+				$("#buttonDeleteGroup").button().click( function() {
+					$("#dialog-userGroups").dialog("open");
+					return false;
+				});
+				
+				$("#buttonSearchUsers").button().click( function() {
+					var toSearch = $("input#searchUsers").val();
+					for (var nig in saveData.notInGroup) {
+						$("#users li#"+saveData.notInGroup[nig].id).show();
+						if (saveData.notInGroup[nig].login.indexOf(toSearch) == -1) {
+							$("#users li#"+saveData.notInGroup[nig].id).hide();
+						}
+					}
+				}); 
+				
+				$("#users li").dblclick( function () {
+					addUserToGroup (this.id, saveData.idUserGroup);
+				});	
+
+				$("#usersinGroup li").dblclick( function () {
+					removeUserFromGroup (this.id, saveData.idUserGroup);
+				});
+							
+				// there's the users and the group
+				var $users = $( "#users" ), $group = $( "#group" );
+
+				// let the users items be draggable
+				$( "li", $users ).draggable({
+					cancel: "a.ui-icon", // clicking an icon won't initiate dragging
+					revert: "invalid", // when not dropped, the item will revert back to its initial position
+					containment: "document",
+					helper: "clone",
+					cursor: "move"
+				});
+				
+				$( "li", $group ).draggable({
+					cancel: "a.ui-icon", // clicking an icon won't initiate dragging
+					revert: "invalid", // when not dropped, the item will revert back to its initial position
+					containment: "document",
+					helper: "clone",
+					cursor: "move"
+				});
+
+				// let the group be droppable, accepting the users items
+				$group.droppable({
+					accept: "#users > li",
+					activeClass: "ui-state-highlight",
+					drop: function( event, ui ) {
+						addToGroup( ui.draggable );
+					}
+				});
+
+				// let the users be droppable as well, accepting items from the group
+				$users.droppable({
+					accept: "#group li",
+					activeClass: "custom-state-active",
+					drop: function( event, ui ) {
+						removeFromGroup( ui.draggable );
+					}
+				});
+
+				function addToGroup( $item ) {
+					$item.fadeOut(function() {
+						var $list = $( "ul", $group ).length ?
+							$( "ul", $group ) :
+							$( "<ul class='users ui-helper-reset'/>" ).appendTo( $group );
+						$item.appendTo( $list ).fadeIn();
+					});
+					addUserToGroup ($item.context.id, saveData.idUserGroup);
+				}
+
+				function removeFromGroup( $item ) {
+					$item.fadeOut(function() {
+						$item.css( "height", "96px" ).end().appendTo( $users ).fadeIn();
+					});
+					removeUserFromGroup ($item.context.id, saveData.idUserGroup);  // Add the user to the group (with ajax)
+				}
+			});
+		},
+		dataType: 'json'
+	});	
+}
+
+/**
+ * Gets the template to create a usergroup, checks the form and if it is validated, sends the data with ajax to the server.
+ * When the response of ajax request is received (containing the id of the created group), the function prints the groups's page.
+ * Calls the action createUserGroup
+ * Uses the template "addUserGroupForm.html"
+ * @function
+ */
+function createUserGroup() {
+	deletePeriodicGetStatus();
+	$.get('templates/addUserGroupForm.html', function(data) {
+		$('#content').html( $.tmpl(data, null) );
+		
+		var $levelUG = $("#levelUG");
+		var $slider = $("#slider-level");
+	  	
+		$slider.slider({
+			range: "max",
+			min: 1,
+			max: 255,
+			value: 255,
+			slide: function( event, ui ) {
+				$levelUG.val( ui.value );
+			}
+		});
+		$levelUG.val( $slider.slider("value") );
+		
+		$("#buttonAddGroup").button().click(function() { 
+     		var nameUG = $("input#NameUG").val();
+     		var levelUG = $levelUG.val();
+    	 	var regexpName = /^[a-z]([0-9a-z_])+$/i; 
+	
+			if ( (nameUG.length < 3) || (nameUG.length > 30) ) {
+				$("#formaddusergroup .ui-state-error").html('<p>Group name must be between 3 and 30 chars </p>'); return false;
+			} else if (! regexpName.test(nameUG)) {
+				$("#formaddusergroup .ui-state-error").html("<p>Group name may consist of letters, numbers and underscores, and begin with a letter</p>");  return false; 
+			} else {
+				$.ajax({
+					url: "?ajax=true&action=createUserGroup",
+					type: 'post',
+					data: 'name=' + nameUG + '&level=' + levelUG,
+					error: function(data){
+						$("#ulusergroups").prepend('<li> <a href="#" id="usergroup' + data + '" onclick="usergroups(' + data + ')"> ' + nameUG + ' </a></li>');						
+						usergroups(data); // To go on the group's page
+					},
+					success: function(data){
+						$("#ulusergroups").prepend('<li> <a href="#" id="usergroup' + data + '" onclick="usergroups(' + data + ')"> ' + nameUG + ' </a></li>');
+						usergroups(data); // To go on the group's page
+					},
+					dataType: 'json'
+				});
+				$(".ui-state-error").html('');
+				return false;	
+			}
+			return false;
+		});
+	
+	});
+}
+
+/**
+ * Send an ajax request to delete the usergroup. 
+ * When the response is received, prints a message to tell the admin.
+ * Calls the action deleteUserGroup
+ * @function
+ * @param {Number} idGroup The id of the group we want to delete
+ */
+function deleteUserGroup(idGroup) {
+	$.ajax({
+		url: "?ajax=true&action=deleteUserGroup",
+		type: 'post',
+		data: 'idGroup=' + idGroup.substring(2),
+		error: function(data){
+ 			$('#content').html('');
+ 			$("#messages").html('<div id="userGroupDeletedMessage" class="ui-state-error ui-corner-all" style="margin-top: 20px;"> <p> Group deleted !</p> </div>');
+			$("#userGroupDeletedMessage").delay(3000).hide(2000); 
+		},
+		success: function(data){
+ 			$('#content').html('');
+ 			$("#messages").html('<div id="userGroupDeletedMessage" class="ui-state-error ui-corner-all" style="margin-top: 20px;"> <p> Group deleted !</p> </div>');
+			$("#userGroupDeletedMessage").delay(3000).hide(2000); 
+		},
+		dataType: 'json'
+	});
+	$("#usergroup" + idGroup).remove(); 	// deletes the group on the menu
+}
+
+/**
+ * Send an ajax request to add an user in the group. 
+ * When the response is received, the page is refreshed.
+ * Calls the action addUserToGroup
+ * @function
+ * @param {Number} idUser The id of the user we want to add in the group
+ * @param {Number} idGroup The id of the group
+ */
+function addUserToGroup(idUser, idGroup) {
+	$.ajax({
+		url: "?ajax=true&action=addUserToGroup",
+		type: 'post',
+		data: 'idUser=' + idUser + '&idGroup=' + idGroup,
+		error: function(data){
+			alert('error');
+		},
+		success: function(data){
+			usergroups(idGroup);
+		},
+		dataType: 'json'
+	});	
+}
+
+/**
+ * Send an ajax request to remove an user from the group. 
+ * When the response is received, the page is refreshed.
+ * Calls the action removeUserFromGroup
+ * @function
+ * @param {Number} idUser The id of the user we want to remove from the group
+ * @param {Number} idGroup The id of the group
+ */
+function removeUserFromGroup(idUser, idGroup) {
+	$.ajax({
+		url: "?ajax=true&action=removeUserFromGroup",
+		type: 'post',
+		data: 'idUser=' + idUser + '&idGroup=' + idGroup,
+		error: function(data){
+			alert('error');
+		},
+		success: function(data){
+			usergroups(idGroup);
+		},
+		dataType: 'json'
+	});	
+}
+
+
+
+/* Host groups functions : */
+
+/**
+ * Gets a hostgroup's data, and generates a page to manage it, adding or removing hosts.
+ * Calls the action getHostGroups
+ * Uses the templates "hostGroupsAdminManage.html"
+ * Contains 2 functions : addToGroup( $item ) and removeFromGroup( $item ) to add an host in the group or remove it.
+ * @function
+ * @param {Number} id The id of the group we want to manage
+ */
+function hostgroups(id) {
+	deletePeriodicGetStatus();
+	$.ajax({
+		url: "?ajax=true&action=getHostGroups",
+		type: 'post',
+		data: 'id=' + id,
+		success: function(data){	
+			var saveData = data;
+			
+			// TODO : create an array of hosts in group and another one for hosts not in group !
+			var i=0, j=0;
+			saveData.notInGroup = new Array();
+			saveData.inGroup = new Array();
+			
+			for (var ah in saveData.allHosts) {	
+				var inGrp = false;		
+				for (var hig in saveData.hostsInGroup) {
+					if (saveData.hostsInGroup[hig] === saveData.allHosts[ah].idH) {
+						saveData.inGroup[i++]=saveData.allHosts[ah];
+						inGrp = true;
+					}
+				}
+				if (! inGrp) {
+					saveData.notInGroup[j++]=saveData.allHosts[ah];
+				}
+			}				
+
+			$.get('templates/hostGroupsAdminManage.html', function(data) {
+				$('#content').html( $.tmpl(data, saveData) );
+				
+				$( "#dialog-hostGroups" ).dialog({
+					autoOpen: false,
+					resizable: false,
+					height:240,
+					modal: true,
+					buttons: {
+						"OK": function() {
+							deleteHostGroup ($(".hostGroup")[0].id);
+							$(this).dialog("close");
+						},
+						Cancel: function() {
+							$(this).dialog("close");
+						}
+					}
+				});
+						
+				$("#buttonDeleteGroup").button().click( function() {
+					$("#dialog-hostGroups").dialog("open");
+					return false;
+				}); 		
+
+				$("#buttonSearchHosts").button().click( function() {
+					var toSearch = $("input#searchHosts").val();
+					for (var nig in saveData.notInGroup) {
+						$("#hosts li#"+saveData.notInGroup[nig].idH).show();
+						if (saveData.notInGroup[nig].nameH.indexOf(toSearch) == -1) {
+							$("#hosts li#"+saveData.notInGroup[nig].idH).hide();
+						}
+					}
+				}); 
+				
+				$("#hosts li").dblclick( function () {
+					addHostToGroup (this.id, saveData.idHostGroup);
+				});	
+
+				$("#hostsinGroup li").dblclick( function () {
+					removeHostFromGroup (this.id, saveData.idHostGroup);
+				});
+											
+				// there's the hosts and the group
+				var $hosts = $( "#hosts" ), $group = $( "#group" );
+
+				// let the hosts items be draggable
+				$( "li", $hosts ).draggable({
+					cancel: "a.ui-icon", // clicking an icon won't initiate dragging
+					revert: "invalid", // when not dropped, the item will revert back to its initial position
+					containment: "document",
+					helper: "clone",
+					cursor: "move"
+				});
+				
+				$( "li", $group ).draggable({
+					cancel: "a.ui-icon", // clicking an icon won't initiate dragging
+					revert: "invalid", // when not dropped, the item will revert back to its initial position
+					containment: "document",
+					helper: "clone",
+					cursor: "move"
+				});
+
+				// let the group be droppable, accepting the hosts items
+				$group.droppable({
+					accept: "#hosts > li",
+					activeClass: "ui-state-highlight",
+					drop: function( event, ui ) {
+						addToGroup( ui.draggable );
+					}
+				});
+
+				// let the hosts be droppable as well, accepting items from the group
+				$hosts.droppable({
+					accept: "#group li",
+					activeClass: "custom-state-active",
+					drop: function( event, ui ) {
+						removeFromGroup( ui.draggable );
+					}
+				});
+
+				function addToGroup( $item ) {
+					$item.fadeOut(function() {
+						var $list = $( "ul", $group ).length ?
+							$( "ul", $group ) :
+							$( "<ul class='hosts ui-helper-reset'/>" ).appendTo( $group );
+						$item.appendTo( $list ).fadeIn();
+					});
+					addHostToGroup ($item.context.id, saveData.idHostGroup);
+				}
+
+				function removeFromGroup( $item ) {
+					$item.fadeOut(function() {
+						$item.css( "height", "96px" ).end().appendTo( $hosts ).fadeIn();
+					});
+					removeHostFromGroup ($item.context.id, saveData.idHostGroup);  // Add the host to the group (with ajax)
+				}
+			});
+		},
+		dataType: 'json'
+	});	
+}
+
+/**
+ * Gets the name and status of the hosts from all the groups and prints them, group by group
+ * Then, runs a function to refresh the hosts' status every minute.
+ * Calls the action seeallhostgroups
+ * Uses the template "viewAllHostGroups.html"
+ * @function
+ */
+function seeAllHostGroups () {
+	deletePeriodicGetStatus();
+	resetHostTab();
+	
+	$.ajax({
+		url: "?ajax=true&action=seeallhostgroups",
+		type: 'post',
+		success: function(data){
+	  		window.toRefreshStatus = Array();
+ 			window.toRefreshStatusSize = 0;
+ 			
+			var saveData = data;
+			var groups = data['groups'];
+			
+	  		if (data == null) { 
+ 				logout(); 
+ 				return false; 
+ 			}
+
+	   	$('#content').html('<div id=userHostGroups>');
+						
+			$.get('templates/viewAllHostGroups.html', function(data) {
+				$("#userHostGroups").html( $.tmpl(data, saveData) );
+    			$('button').button();
+    			
+    			$('.wolButton').hide();
+     			$('.turnOffButton').hide();
+     			   			
+    			var tabSend = new Array ();			
+    			for (var g in groups) {
+					var groups_hosts = groups[g].hostsInGroup;
+					for (var gh in groups_hosts) {
+						if (tabSend[groups_hosts[gh].idH] != true) {
+							tabSend[groups_hosts[gh].idH] = true;
+							getStatus(groups_hosts[gh].idH, "hg");
+							add2tab(groups_hosts[gh].idH, "hg");
+  						}
+					}
+				}
+			});
+			runPeriodicGetStatus ();			
+  	  },
+  	  dataType: 'json'
+	});
+}
+
+/**
+ * Gets the template to create an hostgroup, checks the form and if it is validated, sends the data with ajax to the server.
+ * When the response of ajax request is received (containing the id of the created group), the function prints the group's page.
+ * Calls the action createHostGroup
+ * Uses the template "addHostGroupForm.html"
+ * @function
+ */
+function createHostGroup() {
+	$.get('templates/addHostGroupForm.html', function(data) {
+		$('#content').html( $.tmpl(data, null) );
+		
+	  	var $slider = $( "#slider-level" );
+	  	var $level = $( "#levelHG" )
+	  	
+		$slider.slider({
+			range: "max",
+			min: 1,
+			max: 255,
+			value: 255,
+			slide: function( event, ui ) {
+				$level.val( ui.value );
+			}
+		});
+		$level.val( $slider.slider("value") );
+		
+		$("#buttonAddGroup").button().click(function() { 
+     		var nameHG = $("input#NameHG").val();
+     		var levelHG = $level.val();
+    	 	var regexpName = /^[a-z]([0-9a-z_])+$/i; 
+	
+			if ( (nameHG.length < 3) || (nameHG.length > 30) ) {
+				$("#formaddhostgroup .ui-state-error").html('<p>Group name must be between 3 and 30 chars </p>'); return false;
+			} else if (! regexpName.test(nameHG)) {
+				$("#formaddhostgroup .ui-state-error").html("<p>Group name may consist of letters, numbers and underscores, and begin with a letter</p>");  return false; 
+			} else {
+				$.ajax({
+					url: "?ajax=true&action=createHostGroup",
+					type: 'post',
+					data: 'name=' + nameHG + '&level=' + levelHG,
+					error: function(data){
+						$("#ulhostgroups").prepend('<li> <a href="#" id="hostgroup' + data + '" onclick="hostgroups(' + data + ')"> ' + nameHG + ' </a></li>');
+						hostgroups(data); // To go on the group's page
+					},
+					success: function(data){
+						$("#ulhostgroups").prepend('<li> <a href="#" id="hostgroup' + data + '" onclick="hostgroups(' + data + ')"> ' + nameHG + ' </a></li>');						
+						hostgroups(data); // To go on the group's page
+					},
+					dataType: 'json'
+				});
+				$(".ui-state-error").html('');
+				return false;	
+			}
+			return false;
+		});
+	});
+}
+
+/**
+ * Send an ajax request to delete the hostgroup. 
+ * When the response is received, prints a message to tell the admin.
+ * Calls the action deleteHostGroup
+ * @function
+ * @param {Number} idGroup The id of the group we want to delete
+ */
+function deleteHostGroup(idGroup) {
+	$.ajax({
+		url: "?ajax=true&action=deleteHostGroup",
+		type: 'post',
+		data: 'idGroup=' + idGroup.substring(2),
+		error: function(data){
+ 			$('#content').html('');
+ 			$("#messages").html('<div id="hostGroupDeletedMessage" class="ui-state-error ui-corner-all" style="margin-top: 20px;"> <p> Group deleted !</p> </div>');
+			$("#hostGroupDeletedMessage").delay(3000).hide(2000); 
+		},
+		success: function(data){
+ 			$('#content').html('');
+ 			$("#messages").html('<div id="hostGroupDeletedMessage" class="ui-state-error ui-corner-all" style="margin-top: 20px;"> <p> Group deleted !</p> </div>');
+			$("#hostGroupDeletedMessage").delay(3000).hide(2000); 
+		},
+		dataType: 'json'
+	});
+	$("#hostgroup" + idGroup).remove(); // to delete from the menu
+}
+
+/**
+ * Send an ajax request to add an host in the group. 
+ * When the response is received, the page is refreshed.
+ * Calls the action addHostToGroup
+ * @function
+ * @param {Number} idHost The id of the host we want to add in the group
+ * @param {Number} idGroup The id of the group
+ */
+function addHostToGroup(idHost, idGroup) {
+	$.ajax({
+		url: "?ajax=true&action=addHostToGroup",
+		type: 'post',
+		data: 'idHost=' + idHost + '&idGroup=' + idGroup,
+		error: function(data){
+			alert('error');
+		},
+		success: function(data){
+			hostgroups(idGroup);
+		},
+		dataType: 'json'
+	});	
+}
+
+/**
+ * Send an ajax request to remove an host from the group. 
+ * When the response is received, the page is refreshed.
+ * Calls the action removeHostFromGroup
+ * @function
+ * @param {Number} idHost The id of the host we want to remove from the group
+ * @param {Number} idGroup The id of the group
+ */
+function removeHostFromGroup(idHost, idGroup) {
+	$.ajax({
+		url: "?ajax=true&action=removeHostFromGroup",
+		type: 'post',
+		data: 'idHost=' + idHost + '&idGroup=' + idGroup,
+		error: function(data){
+			alert('error');
+		},
+		success: function(data){
+			hostgroups(idGroup);
+		},
+		dataType: 'json'
+	});	
+}
+
+/* Common functions : */
+
+/**
+ * Gets the data about hosts and groups permissions and generates a page using the template, to manage them
+ * Calls the action manageperms
+ * Uses the templates "groupsPermissionsAdminManage.html"
+ * @function
+ */
+function managePermissions() {
+		deletePeriodicGetStatus();
+		$.ajax({
+	  	url: "?ajax=true&action=manageperms",
+	  	type: 'post',
+	  	success: function(data){
+			var saveData=data;
+
+			$.get('templates/groupsPermissionsAdminManage.html', function(data) {
+				$('#content').html( $.tmpl(data, saveData) );
+				var hg = saveData.hostGroups;
+				var ug = saveData.userGroups;
+								
+				for (var i in hg) {
+					$( "#slider-level-host" + hg[i].idHostGroup ).slider({
+						range: "max",
+						min: 1,
+						max: 255,
+						value: hg[i].level,
+						slide: function( event, ui ) {
+							$( "#levelHG" + ui.handle.parentNode.id.substring(17) ).val( ui.value ); // we get the id of the slider !
+						}
+					});
+					
+					$( "#levelHG" + hg[i].idHostGroup ).val( $( "#slider-level-host" + hg[i].idHostGroup ).slider( "value" ) );
+				}
+				
+				for (var j in ug) {
+					$( "#slider-level-user" + ug[j].idUserGroup ).slider({
+						range: "max",
+						min: 1,
+						max: 255,
+						value: ug[j].level,
+						slide: function( event, ui ) {
+							$( "#levelUG" + ui.handle.parentNode.id.substring(17) ).val( ui.value ); // we get the id of the slider !
+						}
+					});
+					
+					$( "#levelUG" + ug[j].idUserGroup ).val( $( "#slider-level-user" + ug[j].idUserGroup ).slider( "value" ) );
+				}
+				
+				$("button").button();
+				
+				$(".havePermU").hide();
+				$(".havePermH").hide();								
+				$(".donthavePermH").hide();
+				$(".donthavePermU").hide();	
+			
+				$(".userGroupPerm").click(function () {
+					var userLevel = $("#currU" + this.id).html();
+					$(".hostGroupPerm").removeClass('ui-state-highlight');
+					$(".hostGroupPerm").removeClass('ui-state-error');
+					$(".userGroupPerm").removeClass('ui-state-highlight');
+					$(".userGroupPerm").removeClass('ui-state-error');
+					$(".userGroupPerm#" + this.id).addClass('ui-state-highlight');
+					$(".havePermU").hide();
+					$(".havePermH").hide();								
+					$(".donthavePermH").hide();
+					$(".donthavePermU").hide();
+														
+					for (var i in hg) {
+						var hostLevel = $( "#slider-level-host" + hg[i].idHostGroup ).slider( "value" ) ;		
+						if (hostLevel < userLevel) {
+							$(".hostGroupPerm#" + hg[i].idHostGroup).removeClass('ui-state-error');
+							$("#donthavePermH" + hg[i].idHostGroup).show();
+						} else {
+							$(".hostGroupPerm#" + hg[i].idHostGroup).addClass('ui-state-error');	
+							$("#havePermH" + hg[i].idHostGroup).show();
+						}
+					}					
+				});
+
+				$(".hostGroupPerm").click(function () {
+					var hostLevel = $("#slider-level-host" + this.id).slider( "value" );
+					$(".hostGroupPerm").removeClass('ui-state-highlight');
+					$(".hostGroupPerm").removeClass('ui-state-error');
+					$(".userGroupPerm").removeClass('ui-state-highlight');
+					$(".userGroupPerm").removeClass('ui-state-error');
+					$(".hostGroupPerm#" + this.id).addClass('ui-state-highlight');
+					$(".havePermU").hide();
+					$(".havePermH").hide();								
+					$(".donthavePermH").hide();
+					$(".donthavePermU").hide();	
+										
+					for (var i in ug) {
+						var userLevel = $( "#slider-level-user" + ug[i].idUserGroup ).slider( "value" ) ;					
+						if (userLevel > hostLevel) {
+							$(".userGroupPerm#" + ug[i].idUserGroup).removeClass('ui-state-error');
+							$("#donthavePermU" + ug[i].idUserGroup).show();
+						} else {
+							$(".userGroupPerm#" + ug[i].idUserGroup).addClass('ui-state-error');	
+							$("#havePermU" + ug[i].idUserGroup).show();
+						}
+					}					
+					
+				});
+							
+			});
+
+   	},
+  		dataType: 'json'
+	});
+}
+
+/**
+ * Send an ajax request to change the permission level of an hostgroup.
+ * When the response is received, some data are changed on the page (but no refresh)
+ * Calls the action changepermhostgroup
+ * @function
+ * @param {Number} idHostGroup The id of the hostgroup we want to change perm level.
+ */
+function changeHostGroupLevelPerm (idHostGroup) {
+	var level = $( "#slider-level-host" + idHostGroup ).slider( "value" );
+	$.ajax({
+	  	url: "?ajax=true&action=changepermhostgroup",
+	  	type: 'post',
+	  	data: 'idHostGroup=' + idHostGroup + '&level=' + level,
+	  	success: function(data){
+	  		$("#currH" + idHostGroup).html(level);
+	  		$(".hostGroupPerm").removeClass('ui-state-highlight');
+			$(".hostGroupPerm").removeClass('ui-state-error');
+			$(".userGroupPerm").removeClass('ui-state-highlight');
+			$(".userGroupPerm").removeClass('ui-state-error');
+			$(".havePermU").hide();
+			$(".havePermH").hide();								
+			$(".donthavePermH").hide();
+			$(".donthavePermU").hide();	
+   	},
+  		dataType: 'json'
+  	});	
+}	
+
+/**
+ * Send an ajax request to change the permission level of an usergroup.
+ * When the response is received, some data are changed on the page (but no refresh)
+ * Calls the action changepermusergroup
+ * @function
+ * @param {Number} idUserGroup The id of the hostgroup we want to change perm level.
+ */
+function changeUserGroupLevelPerm (idUserGroup) {
+	var level = $( "#slider-level-user" + idUserGroup ).slider( "value" );
+	$.ajax({
+	  	url: "?ajax=true&action=changepermusergroup",
+	  	type: 'post',
+	  	data: 'idUserGroup=' + idUserGroup + '&level=' + level,
+	  	success: function(data){
+	  		$("#currU" + idUserGroup).html(level);
+			$(".hostGroupPerm").removeClass('ui-state-highlight');
+			$(".hostGroupPerm").removeClass('ui-state-error');
+			$(".userGroupPerm").removeClass('ui-state-highlight');
+			$(".userGroupPerm").removeClass('ui-state-error');
+			$(".havePermU").hide();
+			$(".havePermH").hide();								
+			$(".donthavePermH").hide();
+			$(".donthavePermU").hide();				
+   	},
+  		dataType: 'json'
+  	});
+}

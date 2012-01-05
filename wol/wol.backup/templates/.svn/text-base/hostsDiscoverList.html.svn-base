@@ -1,0 +1,18 @@
+<div id="hostsDiscover">
+	<table>
+		<TR>
+			<TH> name </TH>
+			<TH> MAC </TH>
+			<TH> IP </TH>
+			<TH> Add </TH>
+		</TR>
+		{{each hosts}}
+		<TR id="hd${id}">
+			<TD class="name" id="hd${id}">${name}</TD>
+			<TD class="mac" id="hd${id}">${mac}</TD>
+			<TD class="ip" id="hd${id}">${ip}</TD>
+			<TD> <button id="${id}" class="addDisco"> Add </button> </TD>
+ 		</TR>
+ 		{{/each}}
+	</table>
+</div>

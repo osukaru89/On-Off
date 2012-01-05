@@ -1,0 +1,17 @@
+<div id="dialog-settings-farm" title="Farm Settings">
+	<h3> Do you want users to see all hosts informations ? </h3>
+	<div id="seeOrNot">
+		{{if (usersCanView == 1) }} 
+		<input type="radio" id="seeallH" name="seeOrNot" checked="checked"/>
+		{{else}}
+		<input type="radio" id="seeallH" name="seeOrNot"/>
+		{{/if}}
+		<label for="seeallH"> Yes </label>
+		{{if (usersCanView == 0) }}
+		<input type="radio" id="percentofH" name="seeOrNot" checked="checked"/>
+		{{else}}
+		<input type="radio" id="percentofH" name="seeOrNot"/>
+		{{/if}}
+		<label for="percentofH"> Only percentage of hosts On </label>
+	</div>
+</div>

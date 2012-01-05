@@ -1,0 +1,81 @@
+#!/bin/bash
+
+if [ $# -le 1 ]; then
+ echo "Bad command : use  $0 -h help for more information"
+ exit
+fi;
+
+# Parse params :
+
+reg=0
+wordok=0
+dirok=0
+
+while getopts ce:h:p:w: option
+do
+ case $option in
+  c) 
+    clear
+  ;;
+  e)
+    ext="."$OPTARG
+  ;;
+  p)
+    dir=$OPTARG
+    dirok=1
+  ;;
+  w)
+    word=$OPTARG
+    reg=2
+    wordok=1
+  ;;
+  h)
+    echo -e "\033[31mUsage : $0 -p path -w searched_word [OPTIONS]"
+    echo "	searchs the word in all the files of the directory 'path' and sub-directories"
+    echo "OPTIONS :"
+    echo "	- e file_extension : only search in files with the good file extension"
+    echo "	- c : clears the console before printing search result"
+    echo -e "\033[0m"
+    exit
+  ;;
+  ?)   
+    echo "Bad command : use  $0 -h help for more information"
+    exit
+  ;;
+ esac
+done
+
+# reads variables to see if all params are set :
+
+if [ $wordok -eq 0 ]; then
+  echo "Bad command : use  $0 -h help for more information"
+  exit 
+elif [ $dirok -eq 0 ]; then
+  echo "Bad command : use  $0 -h help for more information"
+  exit 
+fi;
+
+# if right, run the script :
+
+echo -e "\033[34m**********************************************\033[0m"
+echo -e "\033[34m* List of files with the matching expression *\033[0m"
+echo -e "\033[34m**********************************************\033[0m"
+echo -e "\033[33m==> Search expression : $word\033[0m"
+echo -e "\033[33m===> In the directory : $dir\033[0m"
+echo -e "\033[33m===> in files with extension : $ext\033[0m"
+
+for i in $( find $dir ) ; do
+
+ if [[ $i == *`echo $ext` ]]; then
+  if [ -f $i ]; then
+    cat $i | grep $word >> /dev/null
+    if [ $? -eq 0 ]; then
+      echo -e "\033[33m_______\033[0m"
+      echo -e "\033[31m$i\033[0m"
+      cat $i | grep -n $word | sed 's/^\([0-9:-]*\)\s*/\1\ /' | grep --color=always $word
+    fi;
+  fi;
+ fi;
+done;
+echo -e "\033[33m_______\033[0m"
+exit

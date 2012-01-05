@@ -1,0 +1,113 @@
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/svn/wol/!svn/ver/59/trunk/php-wol-2.0
+END
+exprFind
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/wol/!svn/ver/59/trunk/php-wol-2.0/exprFind
+END
+about_php_files.txt
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/wol/!svn/ver/56/trunk/php-wol-2.0/about_php_files.txt
+END
+footer.php
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/wol/!svn/ver/48/trunk/php-wol-2.0/footer.php
+END
+calledByCron.php
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/wol/!svn/ver/49/trunk/php-wol-2.0/calledByCron.php
+END
+about_html_templates.txt
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/wol/!svn/ver/56/trunk/php-wol-2.0/about_html_templates.txt
+END
+index.php
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/wol/!svn/ver/58/trunk/php-wol-2.0/index.php
+END
+daemonGetStatus.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/wol/!svn/ver/49/trunk/php-wol-2.0/daemonGetStatus.php
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/wol/!svn/ver/58/trunk/php-wol-2.0/README
+END
+wolinit.sh
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/wol/!svn/ver/21/trunk/php-wol-2.0/wolinit.sh
+END
+baseDatos.sql
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/wol/!svn/ver/58/trunk/php-wol-2.0/baseDatos.sql
+END
+test.php
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/wol/!svn/ver/46/trunk/php-wol-2.0/test.php
+END
+TODO
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/wol/!svn/ver/48/trunk/php-wol-2.0/TODO
+END
+turnoffinit
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/wol/!svn/ver/21/trunk/php-wol-2.0/turnoffinit
+END
+datosTest.sql
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/wol/!svn/ver/44/trunk/php-wol-2.0/datosTest.sql
+END
+toCallCalledByCron.sh
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/wol/!svn/ver/21/trunk/php-wol-2.0/toCallCalledByCron.sh
+END
+calledByCron.sh
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/wol/!svn/ver/40/trunk/php-wol-2.0/calledByCron.sh
+END
+shutdown
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/wol/!svn/ver/22/trunk/php-wol-2.0/shutdown
+END
+header.php
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/wol/!svn/ver/58/trunk/php-wol-2.0/header.php
+END

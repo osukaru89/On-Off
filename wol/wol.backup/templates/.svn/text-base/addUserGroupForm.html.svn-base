@@ -1,0 +1,21 @@
+<div id="formaddusergroup">
+	<h3> Create new Usergroup: </h3>
+	<div class="ui-state-error ui-corner-all" style="margin-top: 20px; padding: 0 .7em;">  </div>
+   <form id="createUG">
+      <p>
+      	<label> Name (3-30 chars) : </label> 
+      	<input type="text" name="NameUG" id="NameUG"/>
+      </p>
+      <br><br>
+ 		<p>
+			<label for="level"> Access level : (1 = God, 255 = Nothing) </label>
+			<input type="text" id="levelUG" style="border:0; color:#f6931f; font-weight:bold;" />
+		</p>
+		<br><br>
+		<div id="slider-level"></div>
+   </form>
+   
+   <p>
+     	<button id="buttonAddGroup"> Create group </button>
+   </p>
+</div>

@@ -1,0 +1,16 @@
+PHP-WOL application's dependencies :
+cron
+ping
+ethtool, ifconfig (for setup script)
+
+Commands to run at the server's install :
+	
+
+
+Warning : ttl = 3 for pings (option "-t 3") !
+Can be not enough on big networks with many routers !
+(TODO : add parameter for that)
+
+chmod 711 /usr/sbin/sendmail => to send mails with php
+
+chmod 666 => config files

@@ -1,0 +1,219 @@
+<?php
+
+/**
+ * Manages the data about farms stored in the model and in the database
+ */
+class Wol_ManageFarms {
+
+	static protected $_farms = array();
+	static private $_instance ;
+	
+	/**
+	 * Queries the database and constructs the model
+	 */
+	private function __construct() {
+		$queryListFarms = 'SELECT HF.hostfarm_name NAM, HF.id_hostsfarm IDHF, HF.see_all SA
+			FROM php_wol_hostsfarms HF
+			ORDER BY HF.id_hostsfarm;';
+		$listFarms = mysql_query ($queryListFarms);
+
+		$usersManager = Wol_ManageUsers::getInstance();
+		$hostsManager =  Wol_ManageHosts::getInstance();
+			
+		while ( $rowFarms = mysql_fetch_array($listFarms) )  {
+			$farm2add = new Wol_Farm ();
+			$farm2add->setID($rowFarms['IDHF']);
+			$farm2add->setName($rowFarms['NAM']);
+			$this->_farms[]=$farm2add;
+
+			/* We get the users in the farm */
+			$queryUsers = sprintf ("SELECT UF.id_user IDUSER, UF.id_hostsfarm
+				FROM php_wol_users_hostsfarms UF WHERE UF.id_hostsfarm = %s;", $rowFarms['IDHF']
+			);
+			$listUsers = mysql_query ($queryUsers);
+			while ($rowUsers = mysql_fetch_array ($listUsers)) {
+				$farm2add->addUser($usersManager->getByID($rowUsers['IDUSER']));	
+			}
+			
+			/* And then the hosts */
+			$queryHosts = sprintf ("SELECT HF.id_host IDHOST, HF.id_hostsfarm FROM php_wol_hostfarms_hosts HF WHERE HF.id_hostsfarm = %s",
+				$rowFarms['IDHF']
+			);
+			$listHosts = mysql_query ($queryHosts);
+			
+			while ($rowHosts = mysql_fetch_array ($listHosts)) {
+				$farm2add->addHost($hostsManager->getByID($rowHosts['IDHOST']));	
+			}		
+		}
+	}
+	
+	/**
+	 * Returns the unique object of the class
+	 * (and creates it if it does not exist)
+	 * @static
+	 * @return Wol_ManageFarms the unique instance of the class
+	 */
+	static public function getInstance() {
+		if ( (!isset(self::$_instance)) || (self::$_instance == NULL) ) {
+			self::$_instance = new Wol_ManageFarms();
+		}
+		return self::$_instance;
+	}
+
+	/**
+	 * Searches a farm in this class' list of farms
+	 * @param int $id the id of the farm we want to get
+	 * @return Wol_Farm|bool the farm with the given id (or false if it does not exist)
+	 */
+	public function getByID ($id) {
+		$nbFarms = count ($this->_farms);
+		for ($i = 0; $i < $nbFarms; $i++) {
+			if ( $this->_farms[$i]->getID() === $id ) return $this->_farms[$i];
+		}
+		return false;
+	}	
+
+	/**
+	 * Searches a farm in this class' list of farms and deletes it
+	 * @param int $id the id of the farm we want to delete
+	 */
+	protected function removeFarmFromList ($id) {
+		for ($i=0;$i<count($this->_farms);$i++) {
+			if ($this->_farms[$i]->getID() === $id) {
+				unset($this->_farms[$i]);
+			}
+		}
+	}
+
+	/**
+	 * Adds a farm to this class' list of farms
+	 * @param Wol_Farm $newFarm the farm
+	 */
+	protected function addFarmToList ($newFarm) {
+		$this->_farms[] = $newFarm;
+	}
+
+	/**
+	 * Adds an user to a farm in the database and in the model
+	 * @param int $farmID the id of the farm
+	 * @param int $userID the id of the user
+	 * @return bool true if the relationship has been added in the database, else false
+	 */
+	public function addUser($farmID, $userID) {
+		$query = sprintf("INSERT INTO php_wol_users_hostsfarms (id_user, id_hostsfarm) VALUES (%s, %s);", $userID, $farmID);
+		$result = mysql_query ($query);
+		$this->getByID($farmID)->addUser($userID);
+		return ($result !== false);
+	}
+
+	/**
+	 * Removes an user from a farm in the database and in the model
+	 * @param int $farmID the id of the farm
+	 * @param int $userID the id of the user
+	 * @return bool true if the relationship has been deleted from the database, else false
+	 */
+	public function removeUser($farmID, $userID) {
+		$query = sprintf("DELETE FROM php_wol_users_hostsfarms WHERE id_hostsfarm = '%s' AND id_user = '%s' ;", $farmID, $userID);
+		$result = mysql_query ($query);
+		$this->getByID($farmID)->removeUser($userID);
+		return ($result !== false);
+	}
+
+	/**
+	 * Adds an host to a farm in the database and in the model
+	 * @param int $farmID the id of the farm
+	 * @param int $hostID the id of the host
+	 * @return bool true if the relationship has been added in the database, else false
+	 */
+	public function addHost ($farmID, $hostID) {
+		$query = sprintf("INSERT INTO php_wol_hostfarms_hosts (id_host, id_hostsfarm) VALUES (%s, %s);", $hostID, $farmID);
+		$result = mysql_query ($query);
+		$this->getByID($farmID)->addHost($hostID);
+		return ($result !== false);
+	}
+
+	/**
+	 * Removes an host from a farm in the database and in the model
+	 * @param int $farmID the id of the farm
+	 * @param int $hostID the id of the host
+	 * @return bool true if the relationship has been deleted from the database, else false
+	 */
+	public function removeHost ($farmID, $hostID) {
+		$query = sprintf("DELETE FROM php_wol_hostfarms_hosts WHERE id_hostsfarm = %s AND id_host = %s ;", $farmID, $hostID);
+		$result = mysql_query ($query);
+		$this->getByID($farmID)->removeHost($hostID);
+		return ($result !== false);
+	}
+
+	/**
+	 * Deletes the farm from the database and from the model
+	 * @param int $farmID the id of the farm to delete
+	 * @return bool true if the farm has been deleted from the database, else false
+	 */
+	public function deleteFarm ($farmID) {
+		$query = sprintf("DELETE FROM php_wol_hostsfarms WHERE id_hostsfarm = '%s';", $farmID);
+		$result = mysql_query ($query);
+		if ($result) {
+			$this->removeFarmFromList($farmID);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * Creates a new farm in the database and in the model
+	 * @param string $name the name of the new farm
+	 * @return int the id of the new farm
+	 */
+	public function createFarm ($name) {
+		$query = sprintf("INSERT INTO php_wol_hostsfarms (hostfarm_name) VALUES ('%s');", $name);
+		$result = mysql_query ($query);
+
+		if ($result !== false) {
+			$newFarm = new Wol_Farm ();
+			$newFarm->setName($name);
+			
+			/* Search the farm id to add it on the model and return it */
+   		$queryID = sprintf("SELECT F.id_hostsfarm F_ID, F.hostfarm_name  FROM php_wol_hostsfarms F  WHERE F.hostfarm_name = '%s';", $name);
+   		$resultID = mysql_query ($queryID);
+   		$rowID = mysql_fetch_array($resultID);
+
+			$newFarm->setID($rowID['F_ID']);
+			$this->addFarmToList($newFarm);
+			
+			return $rowID['F_ID'];
+		}
+	}
+
+	/**
+	 * Changes the user view of a farm
+	 * (that indicates if the users being part of this farm can see or not the farm's hosts)
+	 * @param int $idFarm the id of the farm
+	 * @param string $newView the new value of parameter "user view"
+	 * @return bool true on success, false on failure
+	 */	
+	public function changeUserView ( $idFarm, $newView ) {
+		$query = sprintf ('UPDATE php_wol_hostsfarms SET see_all = %s WHERE id_hostsfarm = "%s"', $newView, $idFarm);
+		$result = mysql_query ($query);
+	   if (($frm = $this->getByID($idFarm)) !== false) $frm->setView($newView);
+		return ($result !== false);	
+	}
+
+	/**
+	 * Serializes all farms
+	 * @param bool $onlyID if true, only the id of hosts will be returned (default false : all data are returned)
+	 * @param bool $withUsers if true, a list of users being part of farm is also returned (default false : no users data)
+	 * @param bool $withHosts if true, a list of hosts being part of farm is also returned (default false : no hosts data)
+	 * @param int $forUser if true, hosts data will be returned with custom names given to hosts for the user with the given id (default NULL : no custom names)
+	 * @return array A list of farms with the required data
+	 */	
+	public function getSerialized ($onlyID=false, $withUsers=false, $withHosts=false, $forUser = NULL) {
+		$return = array();
+		foreach ($this->_farms as $f) {
+			$return[] = $f->getSerialized($onlyID, $withUsers, $withHosts, $forUser);
+		}
+		return $return;
+	}
+	
+}

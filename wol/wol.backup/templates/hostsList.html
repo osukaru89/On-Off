@@ -1,0 +1,33 @@
+<div id="generalWrapper">
+<h1 class="header_bg"> Hosts : </h1>
+
+<table>
+    
+	<TR>
+		<TH class="header_bg">name</TH>
+		<TH class="header_bg">MAC</TH>
+		<TH class="header_bg">IP</TH>
+		<TH class="header_bg">owner</TH>
+		<TH class="header_bg">online ?</TH>
+		<TH class="header_bg">On/Off !</TH> 
+	</TR>
+  
+{{each hosts}}
+	<TR>
+		<TD> ${nameH} </TD>
+		<TD> ${mac} </TD>
+		<TD> ${ip} </TD>
+		<TD> ${ownername} </TD>
+		<TD>
+			<div class="status" id="ho${idH}">
+				<img src="img/waiting.gif"></img>
+			</div>
+		</TD>
+		<TD>
+			<button class="wolButton" id="wbho${idH}" class="wolButton" onclick="wakeOnLAN(${idH}, '${nameH}', 'host')"> Power !</button>
+			<button class="turnOffButton" id="tobho${idH}" class="turnOffButton" onclick="turnOff(${idH}, '${nameH}', 'host')"> Turn Off !</button>
+		</TD> 
+	</TR>
+{{/each}}
+</table>
+</div>

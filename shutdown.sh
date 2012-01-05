@@ -1,0 +1,21 @@
+#!/bin/bash
+
+xhost local:$USER > /dev/null
+export DISPLAY=:0
+sudo shutdown -t 60 -h +1 & zenity --width=500 --question --title="Shutdown in 60 seconds" --text="Ok to instant Shutdown."
+
+case $? in
+    0)
+        sudo shutdown -c
+        sudo shutdown -h now;
+    ;;
+    1)
+        sudo shutdown -c
+        exit
+    ;;
+    -1)
+        sudo shutdown -c
+        exit
+    ;;
+esac
+done

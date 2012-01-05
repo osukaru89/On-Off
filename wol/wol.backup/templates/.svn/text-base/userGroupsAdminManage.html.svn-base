@@ -1,0 +1,38 @@
+
+	<div id="ug${idUserGroup}" class="userGroup">
+		<h1> ${nameUserGroup} (user group)  </h1>
+		<p><button id="buttonDeleteGroup"> Delete group </button></p> 
+		<p> Use drag and drop or double click to move users </p>
+		<ul id="users" class="ui-helper-reset ui-helper-clearfix">
+			<h4 class="ui-widget-header"> Users (not in group) </h4>
+			<p>
+				<input type="text" name="searchUsers" id="searchUsers"/>
+				<button id="buttonSearchUsers"> Search ! </button>
+			</p>
+			{{each notInGroup}}
+			<li id="${id}" class="ui-widget-content ui-corner-tr">
+				<h5 class="ui-widget-header"> ${login} </h5>
+				<label> <b> ${email} </b> </label>
+				<p><label> Role : <b> ${role} </b> </label></p>
+			</li>
+			{{/each}}
+		</ul>
+		
+		<div id="group" class="ui-widget-content ui-state-default">
+			<h4 class="ui-widget-header"> Group </h4>
+		<ul id="usersinGroup">	
+			{{each inGroup}}
+			<li id="${id}" class="ui-widget-content">
+				<h5 class="ui-widget-header"> ${login} </h5>
+				<label> <b> ${email} </b> </label>
+				<p><label> Role : <b> ${role} </b> </label></p>
+			</li>
+			{{/each}}
+		</ul>
+		</div>
+		
+		<div id="dialog-userGroups" title="Delete this user group ?">
+			<p>  Do you want to delete the selected user group ? </p>
+		</div>
+		
+	</div>
