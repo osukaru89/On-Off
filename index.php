@@ -40,8 +40,7 @@ session_start ();
 
 		switch ($action) {
 			case 'connect' :
-
-
+				
 				session_unset();
 				$username = $_POST['username'];
 				$password = $_POST['password'];
