@@ -112,6 +112,16 @@ class Ldap_Authentication {
 	 * @return bool true if the login is in the database and if the password matches, else false
 	 */	
 	public function authenticate ($login, $password) {
+		
+		$dn = "uid=".$login.",".self::$_config['usersdn'];
+		
+		if(ldap_bind(self::$_connect_resource,  $dn ,$password)){
+			return true;
+		 } else {
+			return false;
+		 }
+		
+		/*
 		$filter= self::$_config['userloginattr'] . "=" . $login;
 		$toGet = array(self::$_config['userloginattr'], self::$_config['userpwdattr']);
 		$search = ldap_search(self::$_connect_resource, self::$_config['usersdn'], $filter, $toGet);
@@ -121,17 +131,12 @@ class Ldap_Authentication {
 		foreach ($info as $i) {
 			if (isset ($i[self::$_config['userloginattr']])) {
 				
-				/*if ($this->compare($password, $i[self::$_config['userpwdattr']][0])) {
-					return true;
-				}*/
-				$dn = "uid=".$login.",".self::$_config['usersdn'];
-				
-				if(ldap_bind(self::$_connect_resource,  $dn ,$password)){
+				if ($this->compare($password, $i[self::$_config['userpwdattr']][0])) {
 					return true;
 				}
+
 			}
-		}
-		return false;
+		}*/
 	}
 
 	/**
