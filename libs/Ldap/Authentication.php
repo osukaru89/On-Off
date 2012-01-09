@@ -113,30 +113,28 @@ class Ldap_Authentication {
 	 */	
 	public function authenticate ($login, $password) {
 		
-		$dn = "uid=".$login.",".self::$_config['usersdn'];
+		/*$dn = "uid=".$login.",".self::$_config['binddn'];
 		
 		if(ldap_bind(self::$_connect_resource,  $dn ,$password)){
 			return true;
 		 } else {
 			return false;
-		 }
+		 }*/
 		
-		/*
+		
 		$filter= self::$_config['userloginattr'] . "=" . $login;
 		$toGet = array(self::$_config['userloginattr'], self::$_config['userpwdattr']);
 		$search = ldap_search(self::$_connect_resource, self::$_config['usersdn'], $filter, $toGet);
 		$info = ldap_get_entries(self::$_connect_resource, $search);
 		
-		
 		foreach ($info as $i) {
 			if (isset ($i[self::$_config['userloginattr']])) {
-				
 				if ($this->compare($password, $i[self::$_config['userpwdattr']][0])) {
 					return true;
 				}
-
 			}
-		}*/
+		}
+		return false;
 	}
 
 	/**
