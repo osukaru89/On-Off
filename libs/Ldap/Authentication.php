@@ -129,9 +129,10 @@ class Ldap_Authentication {
 		
 		foreach ($info as $i) {
 			if (isset ($i[self::$_config['userloginattr']])) {
-				if ($this->compare($password, $i[self::$_config['userpwdattr']][0])) {
+				return ldap_bind (self::$_connect_resource, self::$_config['binddn'], self::$_config['bindpw']);
+				/*if ($this->compare($password, $i[self::$_config['userpwdattr']][0])) {
 					return true;
-				}
+				}*/
 			}
 		}
 		return false;
