@@ -89,7 +89,7 @@ class Wol_User {
 	private function ldapAuthenticate ($login, $password) {
 		$ldapManager = Ldap_Authentication::getInstance();
 		$isAuthenticated = $ldapManager->authenticate($login, $password);
-		return $isAuthenticated === true;
+		return $isAuthenticated;
 	}
 
 	/**
