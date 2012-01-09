@@ -69,7 +69,7 @@
 					$goodManager = Wol_ManageFarms::getInstance();
 				break;
 			
-				default : 
+				default :
 				break;
 			}
 

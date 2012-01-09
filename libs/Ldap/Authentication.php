@@ -81,9 +81,10 @@ class Ldap_Authentication {
 	}
 
 	/**
-	 * Search in the LDAP database and returns all users
+	 * Search in the LDAP database and returns all users	
 	 * @return array the array of users. Contains for each user : login, ldapID and email (if exists)
 	 */			
+	
 	public function getAllUsers () {
 		$filter= self::$_config['userloginattr'] . "=*";
 		$toGet = array(self::$_config['userloginattr'], self::$_config['usermailattr'], self::$_config['useridattr']);

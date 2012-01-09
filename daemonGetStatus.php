@@ -10,7 +10,7 @@ $db->connect();
 	
 $hostsManager = Wol_ManageHosts::getInstance();
 $hostsManager->ipUpdate();
-$hostsManager->updateStatus();
+//$hostsManager->updateStatus();
 
 /* For statistics : */
 $currHour = intval($argv[1]);
