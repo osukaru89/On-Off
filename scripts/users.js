@@ -83,7 +83,10 @@ function manageUsers () {
 					 			type: 'post',
 					 			data : "login=" + login + "&email=" + email + "&pass=" + pass,
 					 			success : function (data) {
-									manageUsers();
+					 				$(".ui-state-error").html("<p>User added succesfully.</p>");
+					 				$(".ui-state-error").css("display", "block !important");
+					 				window.scrollTo(0, 0);
+					 				setTimeout('manageUsers()', 3000);
 					 			},
 				    			dataType: 'json'
      	      			});
@@ -112,7 +115,9 @@ function deleteUser(id) {
  		type: 'post',
  		data : "&id=" + id,
  		success :function (data) { 
- 			manageUsers(); 
+			$(".ui-state-error").html("<p>User Deleted</p>");
+			$(".ui-state-error").css("display", "block !important");
+			setTimeout('manageUsers()', 3000);
  		},    
   		dataType: 'json'
 	});
@@ -452,7 +457,11 @@ function importFromLdap() {
 		url: "?ajax=true&action=importusersformldap",
 		type: 'post',
 		success : function (data) {
-			manageUsers();
+			
+			$(".ui-state-error").html("<p>Users imported succesfully</p>");
+			$(".ui-state-error").css("display", "block !important");
+			window.scrollTo(0, 0);
+			setTimeout('manageUsers()', 3000);
 		},    
 		dataType: 'json'
 	});

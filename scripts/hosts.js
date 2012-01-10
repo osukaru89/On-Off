@@ -170,7 +170,7 @@ function manageHosts () {
 							 	data : "hostname=" + hname + "&mac=" + mac + "&ip=" + ip + "&owner=" + owner,
 							 	success : function (data) {
 							 		$("#formaddhost .ui-state-error").html('<p>Host Added!</p>');
-							 		setTimeout('manageHosts()', 1000);
+							 		setTimeout('manageHosts()', 1500);
 									
 							 	},    
 						    	dataType: 'json'
@@ -200,7 +200,7 @@ function deleteHost(id) {
  		data : "&id=" + id,
  		success :function (data) {
 	 		$("#formaddhost .ui-state-error").html('<p>Host deleted!</p>');
-	 		setTimeout('manageHosts()', 1000);
+	 		setTimeout('manageHosts()', 1500);
  		},    
   		dataType: 'json'
 	});
