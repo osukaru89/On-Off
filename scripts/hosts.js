@@ -93,6 +93,7 @@ function periodicGetStatus () {
  */
 function manageHosts () {
 	deletePeriodicGetStatus();
+
 	$.ajax({
 	  	url: "?ajax=true&action=managehosts",
 	  	type: 'post',
@@ -146,7 +147,8 @@ function manageHosts () {
 						hostsDiscover();  					
 						$(this).remove();
 					});
-  					
+					
+
   					$('.buttonAddHost').button().click(function() {  
  						var hname = $("input#hostname").val();
   						var mac = $("input#mac").val();
@@ -167,7 +169,9 @@ function manageHosts () {
 							 	type: 'post',
 							 	data : "hostname=" + hname + "&mac=" + mac + "&ip=" + ip + "&owner=" + owner,
 							 	success : function (data) {
-									manageHosts();
+							 		$("#formaddhost .ui-state-error").html('<p>Host Added!</p>');
+							 		setTimeout('manageHosts()', 1000);
+									
 							 	},    
 						    	dataType: 'json'
      	   				});
@@ -194,8 +198,9 @@ function deleteHost(id) {
  		url: "?ajax=true&action=delhost",
  		type: 'post',
  		data : "&id=" + id,
- 		success :function (data) { 
- 			manageHosts();
+ 		success :function (data) {
+	 		$("#formaddhost .ui-state-error").html('<p>Host deleted!</p>');
+	 		setTimeout('manageHosts()', 1000);
  		},    
   		dataType: 'json'
 	});
