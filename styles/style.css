@@ -263,6 +263,8 @@ fieldset {
 	position: relative;
 	float: left;
 	width: 21% !important;
+	overflow-y: scroll;
+	max-height: 500px;
 	border: 1px solid silver !important;
 	left: 2px;
 	background-color: #eeeeee !important;
@@ -335,7 +337,9 @@ fieldset {
 #hosts { 
 	float: left; 
 	width: 21% !important; 
-	min-height: 18em;
+	min-height: 500px;
+	overflow-y: scroll;
+	max-height: 500px;
 	height:100%;
 	position: relative;
 	border: 1px solid silver;
@@ -1006,7 +1010,7 @@ left: 1%;
 
 * select{
 	position: relative;
-	width: 70%;
+	width: 20%;
 	float: right;
 	height: auto;
 	background-color: white;
@@ -1041,7 +1045,7 @@ left: 1%;
 
 #hostsDiscover{
 	position: relative;
-	left: 35%;
+	left: 41%;
   
 }
 
