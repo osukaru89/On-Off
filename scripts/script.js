@@ -620,6 +620,9 @@ function turnOff (id, hname, htype) {
  		url: "?ajax=true&action=turnoff",
  		type: 'post',
  		data : "&id=" + id + "&type=" + htype,
+ 		error: function(data){
+ 			alert("SSH was unable to connect to this Host.");
+ 		},
  		success :function (data) {
  			$.get('templates/sentTurnOff.html', function(data) {
  				$( "#turnOffSend" ).remove();

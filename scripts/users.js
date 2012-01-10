@@ -132,7 +132,7 @@ function deleteUser(id) {
 			$(".ui-state-error").css("display", "block !important");
 			window.scrollTo(0, 0);
 			setTimeout('manageUsers()', 3000);
- 		},    
+ 		},   
   		dataType: 'json'
 	});
 }
