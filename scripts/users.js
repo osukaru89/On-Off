@@ -66,17 +66,29 @@ function manageUsers () {
 						var regexpPass = /^([0-9a-zA-Z])+$/;
 
 						if ( (login.length < 3) || (login.length > 20) ) {
-     	      			$("#formadduser .ui-state-error").html('<p>Login must be between 3 and 20 chars </p>'); return false;
+     	      			$("#formadduser .ui-state-error").html('<p>Login must be between 3 and 20 chars </p>'); 
+     	      			$("#formadduser .ui-state-error").css("display", "block !important");
+     	      			return false;
      	      		} else if (! regexpLogin.test(login)) {
-     	      			$("#formadduser .ui-state-error").html("<p>Username may consist of letters, numbers and underscores, and begin with a letter</p>");  return false; 
+     	      			$("#formadduser .ui-state-error").html("<p>Username may consist of letters, numbers and underscores, and begin with a letter</p>");
+     	      			$("#formadduser .ui-state-error").css("display", "block !important");
+     	      			return false; 
      	      		} else if (! regexpEmail.test(email)) {
-     	     			 	$("#formadduser .ui-state-error").html("<p>Please, enter a valid email adress</p>"); return false; 
+     	     			 	$("#formadduser .ui-state-error").html("<p>Please, enter a valid email adress</p>");
+     	     			 	$("#formadduser .ui-state-error").css("display", "block !important");
+     	     			 	return false; 
      	      		} else if ( (pass.length < 3) || (pass.length > 20) ) {
-     	     			 	$("#formadduser .ui-state-error").html('<p>Password must be between 3 and 20 chars </p>'); return false; 
+     	     			 	$("#formadduser .ui-state-error").html('<p>Password must be between 3 and 20 chars </p>'); 
+     	     			 	$("#formadduser .ui-state-error").css("display", "block !important");
+     	     			 	return false; 
      	     			} else if (! regexpPass.test(pass)) {
-     	      			$("#formadduser .ui-state-error").html("<p>Password may consist of letters and numbers</p>"); return false; 
+     	      			$("#formadduser .ui-state-error").html("<p>Password may consist of letters and numbers</p>"); 
+     	      			$("#formadduser .ui-state-error").css("display", "block !important");
+     	      			return false; 
      	      		} else if ( pass != confpass ) {
-     	      			$("#formadduser .ui-state-error").html("<p>Password and confirmation do not match</p>"); return false; 
+     	      			$("#formadduser .ui-state-error").html("<p>Password and confirmation do not match</p>"); 
+     	      			$("#formadduser .ui-state-error").css("display", "block !important");
+     	      			return false; 
      	      		} else {
   	         			$.ajax ({
      	      	 			url: "?ajax=true&action=adduser",
@@ -109,6 +121,7 @@ function manageUsers () {
  * @function
  * @param {Number} id The id of the user we want to delete
  */
+
 function deleteUser(id) {
 	$.ajax({
  		url: "?ajax=true&action=deluser",
