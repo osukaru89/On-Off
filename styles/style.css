@@ -56,7 +56,7 @@ footer {
 	margin: auto;
 	min-height: 500px;
 	height: auto;
-	width: 750px;
+	width: 1000px;
 	left: 15px;
 }
 
@@ -78,7 +78,7 @@ footer {
 #welcome { 
 	position:absolute;
 	font: 140% "Trebuchet MS", sans-serif;
-	color: #F9F7ED;
+	color: black;
 	float: right;
 	right: 65px;
 	top: 10px;
@@ -102,15 +102,15 @@ footer {
 			
 #userHostsCol {
 	left: 2%;
-	width: auto; 
+	width: 65%; 
 	float: left;
 	position: relative;
 
 } 
 
 #userFarmsCol {
-	left: 8%;
-	width: auto; 
+	left: 4%;
+	width: 30%; 
 	float: left;
 	position: relative;
 }
@@ -737,7 +737,7 @@ left: 1%;
 #generalWrapper, #manageWrapper, #manageGroupsWrapper, #schedWrapper{
 	border-top: 1px solid silver;
 	float: left;
-	width: 650px;
+	width: 1000px;
 	height: auto;
 	top: 50px;
 	position: relative;

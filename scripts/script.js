@@ -354,7 +354,9 @@ function userPage (id) {
 			var farms = data['farms'];
 			var saveData = data;
 
-			$('#content').html('<div id=generalWrapper>').html('<div id=userHostsCol>').append('<div id=userFarmsCol>');	
+			$('#content').html('<div id=generalWrapper>');
+			$('#generalWrapper').html('<div id=userHostsCol>').append('<div id=userFarmsCol>');
+			
 			/* Prints the list of hosts */ 	
 			 					
 			$.get('templates/userPageHostsList.html', function(data) {
