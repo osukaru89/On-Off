@@ -117,6 +117,7 @@ function deleteUser(id) {
  		success :function (data) { 
 			$(".ui-state-error").html("<p>User Deleted</p>");
 			$(".ui-state-error").css("display", "block !important");
+			window.scrollTo(0, 0);
 			setTimeout('manageUsers()', 3000);
  		},    
   		dataType: 'json'

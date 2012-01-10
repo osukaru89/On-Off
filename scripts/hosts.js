@@ -158,11 +158,17 @@ function manageHosts () {
 						var regexpIP = /^((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){3}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})$/i;
     	 	      
 						if ( (hname.length < 3) || (hname.length > 20) ) {
-							$("#formaddhost .ui-state-error").html('<p>Hostname must be between 3 and 20 chars </p>'); return false; 
+							$("#formaddhost .ui-state-error").html('<p>Hostname must be between 3 and 20 chars </p>'); 
+							$("#formaddhost .ui-state-error").css("display", "block !important");
+							return false; 
 						} else if (! regexpmac.test(mac)) {
-							$("#formaddhost .ui-state-error").html("<p>Please, enter a valid mac address</p>"); return false; 
+							$("#formaddhost .ui-state-error").html("<p>Please, enter a valid mac address</p>"); 
+							$("#formaddhost .ui-state-error").css("display", "block !important");
+							return false; 
  						} else if (! regexpIP.test(ip)) {
- 							$("#formaddhost .ui-state-error").html("<p>Please, enter a valid IP address</p>");  return false; 
+ 							$("#formaddhost .ui-state-error").html("<p>Please, enter a valid IP address</p>");  
+ 							$("#formaddhost .ui-state-error").css("display", "block !important");
+ 							return false; 
     		     		} else {
   	  		     			$.ajax ({
    	      			 	url: "?ajax=true&action=addhost",
@@ -170,6 +176,7 @@ function manageHosts () {
 							 	data : "hostname=" + hname + "&mac=" + mac + "&ip=" + ip + "&owner=" + owner,
 							 	success : function (data) {
 							 		$("#formaddhost .ui-state-error").html('<p>Host Added!</p>');
+							 		$("#formaddhost .ui-state-error").css("display", "block !important");
 							 		setTimeout('manageHosts()', 1500);
 									
 							 	},    
@@ -200,6 +207,7 @@ function deleteHost(id) {
  		data : "&id=" + id,
  		success :function (data) {
 	 		$("#formaddhost .ui-state-error").html('<p>Host deleted!</p>');
+	 		$("#formaddhost .ui-state-error").css("display", "block !important");
 	 		setTimeout('manageHosts()', 1500);
  		},    
   		dataType: 'json'
@@ -491,11 +499,11 @@ function hostsDiscover () {
 									var regexpIP = /^((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){3}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})$/i;
     	 	      				console.log($("input#nameDiscover").val()) ; console.log (hostName);
 									if ( (hostName.length < 3) || (hostName.length > 40) ) {
-										$("#formadddiscovered .ui-state-error").html('<p>Hostname must be between 3 and 40 chars </p>'); return false; 
+										$("#formadddiscovered .ui-state-error").html('<p>Hostname must be between 3 and 40 chars </p>').css('display', 'block !important'); return false; 
 									} else if (! regexpmac.test(mac)) {
-										$("#formadddiscovered .ui-state-error").html("<p>Please, enter a valid mac address</p>"); return false; 
+										$("#formadddiscovered .ui-state-error").html("<p>Please, enter a valid mac address</p>").css('display', 'block !important'); return false; 
  									} else if (! regexpIP.test(ip)) {
- 										$("#formadddiscovered .ui-state-error").html("<p>Please, enter a valid IP address</p>");  return false; 
+ 										$("#formadddiscovered .ui-state-error").html("<p>Please, enter a valid IP address</p>").css('display', 'block !important');  return false; 
     		     					} else {
   	  		     						$.ajax ({
    	      						 	url: "?ajax=true&action=addhost",
