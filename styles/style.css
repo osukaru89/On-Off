@@ -67,6 +67,7 @@ footer {
 	width: 50px;
 	position: absolute;
 	left: 10px; 
+	top: 3px;
 }
 			
 #disconnect { 
@@ -971,6 +972,7 @@ left: 1%;
 #buttons_area{
 	width: 100%;
 	position: relative;
+	top: 30px;
 	float: left;
 }
 
