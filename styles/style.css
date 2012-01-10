@@ -265,7 +265,7 @@ fieldset {
 	float: left;
 	width: 21% !important;
 	overflow-y: scroll;
-	max-height: 500px;
+	height: 500px;
 	border: 1px solid silver !important;
 	left: 2px;
 	background-color: #eeeeee !important;
