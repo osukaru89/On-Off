@@ -38,7 +38,12 @@ class Ldap_Authentication {
 		self::$_config = $confManager->parseConfig($dirConf . self::$_config_file);
 		self::$_connect_resource = ldap_connect(self::$_config['host'], self::$_config['port']);
 		ldap_set_option(self::$_connect_resource, LDAP_OPT_PROTOCOL_VERSION, 3);
-		return ldap_bind (self::$_connect_resource, self::$_config['binddn'], self::$_config['bindpw']);
+		
+		if(ldap_bind (self::$_connect_resource, self::$_config['binddn'], self::$_config['bindpw'])){
+			return true;
+		} else{
+			return false;
+		}
 	}
 
 	/**
