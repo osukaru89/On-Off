@@ -1,9 +1,0 @@
-<div id="changeMac">
-	<form id="formChangeMac">
-		<div id="error" class='ui-state-error ui-corner-all' style='margin-top: 20px; padding: 0 .7em;'>  </div>
-		<p>
-			<label> New mac for host <b> ${hname} </b> (format : XX:XX:XX:XX:XX:XX) </label> 
-			<input type='text' id='macform' name='macform' value="${oldval}"/>
-		</p>
-	</form>
-</div>

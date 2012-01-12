@@ -422,7 +422,7 @@ function seeAllHosts () {
 			}); 
 			
 			runPeriodicGetStatus ();
-   	},    
+   	},
   		dataType: 'json'
 	});	
 }

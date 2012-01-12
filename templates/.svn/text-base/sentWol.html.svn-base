@@ -1,9 +1,0 @@
-<div id="wolSend"> 
-	<p><i>A magic packet has been send to the ${htype} <b> ${hname} </b> </i> </p>
-	<p>If it supports "Wake On LAN"<br>
-	if it is on the server&rsquo;s network<br>
-	if the option has been enabled in the BIOS<br>
-	if the script was run last time you used it<br>
-	and if a colleague has not unplugged the network or electric cable<br>
-	it is probably turning on !</p>
-</div>

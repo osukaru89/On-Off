@@ -1,9 +1,0 @@
-<div id="addHostnameForUser">
-	<form id="formAddHostnameForUser">
-		<div id="error" class='ui-state-error ui-corner-all' style='margin-top: 20px; padding: 0 .7em;'>  </div>
-		<p>
-			<label> Name for host <b>${hname}</b> (This name will be only for user <b>${login}</b>)</label> 
-			<input type='text' id='newName' name='newName' value="${hname}"/>
-		</p>
-	</form>
-</div>

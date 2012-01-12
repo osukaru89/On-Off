@@ -1,8 +1,0 @@
-<div id="changeOwner">
-	<form id="formChangeOwner">
-		<p>
-			<label> New owner of the host <b> ${hname} </b> </label> 
-			<select id='usersSelect'> </select>
-		</p>
-	</form>
-</div>

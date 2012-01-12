@@ -1,9 +1,0 @@
-<div id="changeEmail">
-	<div id="error" class="ui-state-error ui-corner-all" style="margin-top: 20px; padding: 0 .7em;">  </div>
-	<form id="formChangeEmail">
-		<p>
-			<label> Enter the new Email for user <b> ${login} </b> </label> 
-			<input type='text' id='email' name='email' value="${oldval}"/>
-	  	</p>
-	</form>
-</div>

@@ -98,6 +98,15 @@ function loginForm(){
 		
 		/*Logging Form*/
 		
+		$("#name, #password").live('keyup', function(event){
+			
+			if(event.keyCode==13){
+				userConnect(name.val(), password.val());
+			} else if(event.keyCode==27){
+				refresh();
+			}
+		});
+		
 		$( "#connect-form" ).dialog({
 			autoOpen: true,
 			height: 300,
@@ -130,9 +139,6 @@ function loginForm(){
 					$( this ).dialog( "close" );
 					forgotPass();
 				},
-			},
-			close: function() {
-				allFields.val( "" ).removeClass( "ui-state-error" );
 			}
 		});
 }

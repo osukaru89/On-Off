@@ -1,9 +1,0 @@
-<div id="changeIP">
-	<form id="formChangeIP">
-		<div id="error" class='ui-state-error ui-corner-all' style='margin-top: 20px; padding: 0 .7em;'>  </div>
-		<p>
-			<label> New IP address for host <b> ${hname} </b> </label> 
-			<input type='text' id='ipform' name='ipform' value="${oldval}"/>
-		</p>
-	</form>
-</div>
