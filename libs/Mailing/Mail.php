@@ -19,7 +19,7 @@ class Mailing_Mail {
 	public function __construct($subject, $text, $sendTo, $sendFrom) {
 		$this->_message = Swift_Message::newInstance();
 		$this->_message->setSubject($subject);
-		$this->_message->setFrom(array('simon@irontec.com' => 'simon@irontec.com'));//$sendFrom => $sendFrom));
+		$this->_message->setFrom(array('geru@irontec.com' => 'geru@irontec.com'));//$sendFrom => $sendFrom));
 		$this->_message->setTo(array($sendTo));
 		$this->_message->setBody($text);
 	}
